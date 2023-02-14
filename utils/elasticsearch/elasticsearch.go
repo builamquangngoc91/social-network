@@ -3,6 +3,7 @@ package elasticsearch
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	log "social-network/utils/log"
 
 	"github.com/olivere/elastic/v7"
@@ -38,4 +39,41 @@ func (e *ElasticClient) Index(ctx context.Context, index string, body interface{
 	return err
 }
 
-func (e *ElasticClient) Search(ctx context.Context, )
+type SearchParams struct {
+	Query  elastic.Query
+	SortBy []elastic.Sorter
+	Index  string
+	Limit  int
+	Offset int
+}
+
+func (e *ElasticClient) Search(ctx context.Context, searchParams *SearchParams) (*elastic.SearchResult, error) {
+	searchSource := elastic.NewSearchSource()
+	searchSource.Query(searchParams.Query)
+
+	queryStr, err := searchSource.Source()
+	if err != nil {
+		return nil, fmt.Errorf("searchSource.Source: %v", err)
+	}
+
+	queryJs, err := json.Marshal(queryStr)
+	if err != nil {
+		return nil, fmt.Errorf("json.Marshal: %v", err)
+	}
+
+	l.Infof("QueryJson: %v", string(queryJs))
+
+	searchService := e.esclient.Search().
+		Index(searchParams.Index).
+		SortBy(searchParams.SortBy...).
+		SearchSource(searchSource).
+		Size(searchParams.Limit).
+		From(searchParams.Offset)
+
+	searchResult, err := searchService.Do(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return searchResult, err
+}
