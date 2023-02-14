@@ -1,0 +1,297 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "API Document",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/affiliate.Account/DeleteAffiliate": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "DeleteAffiliate",
+        "operationId": "affiliate.Account-DeleteAffiliate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ktIDRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        }
+      }
+    },
+    "/api/affiliate.Account/RegisterAffiliate": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "RegisterAffiliate",
+        "operationId": "affiliate.Account-RegisterAffiliate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/xlRegisterAffiliateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baAffiliate"
+            }
+          }
+        }
+      }
+    },
+    "/api/affiliate.Account/UpdateAffiliate": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "UpdateAffiliate",
+        "operationId": "affiliate.Account-UpdateAffiliate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/xlUpdateAffiliateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baAffiliate"
+            }
+          }
+        }
+      }
+    },
+    "/api/affiliate.Account/UpdateAffiliateBankAccount": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "UpdateAffiliateBankAccount",
+        "operationId": "affiliate.Account-UpdateAffiliateBankAccount",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/xlUpdateAffiliateBankAccountRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baAffiliate"
+            }
+          }
+        }
+      }
+    },
+    "/api/affiliate.Misc/VersionInfo": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "VersionInfo",
+        "operationId": "affiliate.Misc-VersionInfo",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktVersionInfoResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "baAffiliate": {
+      "type": "object",
+      "properties": {
+        "bank_account": {
+          "$ref": "#/definitions/baBankAccount"
+        },
+        "email": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "is_test": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/blStatus"
+        }
+      }
+    },
+    "baBankAccount": {
+      "type": "object",
+      "properties": {
+        "account_name": {
+          "type": "string"
+        },
+        "account_number": {
+          "type": "string"
+        },
+        "branch": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "province": {
+          "type": "string"
+        }
+      }
+    },
+    "blStatus": {
+      "type": "string",
+      "enum": [
+        "Z",
+        "P",
+        "N"
+      ]
+    },
+    "ktEmpty": {
+      "type": "object"
+    },
+    "ktIDRequest": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ktVersionInfoResponse": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "service": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "xlRegisterAffiliateRequest": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "bank_account": {
+          "$ref": "#/definitions/baBankAccount"
+        },
+        "email": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "xlUpdateAffiliateBankAccountRequest": {
+      "type": "object",
+      "properties": {
+        "bank_account": {
+          "$ref": "#/definitions/baBankAccount"
+        }
+      }
+    },
+    "xlUpdateAffiliateRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Account"
+    },
+    {
+      "name": "Misc"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "API Document",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/handler.Misc/VersionInfo": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "VersionInfo",
+        "operationId": "handler.Misc-VersionInfo",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktVersionInfoResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/handler.Webhook/ResetState": {
+      "post": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "ResetState",
+        "operationId": "handler.Webhook-ResetState",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/obResetStateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ktEmpty": {
+      "type": "object"
+    },
+    "ktVersionInfoResponse": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "service": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "obResetStateRequest": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "webhook_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Misc"
+    },
+    {
+      "name": "Webhook"
+    }
+  ]
+}

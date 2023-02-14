@@ -1,0 +1,102 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "etop API",
+    "version": "v1"
+  },
+  "paths": {
+    "/test/sample-service/helloWorld": {
+      "post": {
+        "tags": [
+          "Sample"
+        ],
+        "summary": "HelloWorld",
+        "operationId": "sample-service-HelloWorld",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ioEmpty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ioResponse"
+            }
+          }
+        }
+      }
+    },
+    "/test/sample-service/legacy/something": {
+      "post": {
+        "tags": [
+          "Sample"
+        ],
+        "summary": "DoSomething",
+        "operationId": "sample-service-DoSomething",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ioRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ioEmpty"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ioEmpty": {
+      "type": "object"
+    },
+    "ioRequest": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer"
+        },
+        "something": {
+          "type": "string"
+        }
+      }
+    },
+    "ioResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Sample"
+    }
+  ]
+}

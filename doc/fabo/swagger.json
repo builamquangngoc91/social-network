@@ -1,0 +1,3160 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "API Documentation:\n\n### Fabo\n\n- [/doc/common](/doc/xfabo/common) Shared API for managing login and account\n- [/doc/shop](/doc/xfabo/shop) API for shops\n- [/doc/fabo](/doc/fabo) API for fabo conversation",
+    "title": "API Document",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/fabo.Customer/CreateFbUserCustomer": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "CreateFbUserCustomer",
+        "operationId": "fabo.Customer-CreateFbUserCustomer",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvCreateFbUserCustomerRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvFbUserWithCustomer"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.Customer/GetFbUser": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "GetFbUser",
+        "operationId": "fabo.Customer-GetFbUser",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvGetFbUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvFbUserWithCustomer"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.Customer/ListCustomersWithFbUsers": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "ListCustomersWithFbUsers",
+        "operationId": "fabo.Customer-ListCustomersWithFbUsers",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvListCustomersWithFbUsersRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvListCustomersWithFbUsersResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.Customer/ListFbUsers": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "ListFbUsers",
+        "operationId": "fabo.Customer-ListFbUsers",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvListFbUsersRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvListFbUsersResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.Customer/UpdateTags": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "UpdateTags",
+        "operationId": "fabo.Customer-UpdateTags",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvUpdateUserTagsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvUpdateUserTagResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/CreateMessageTemplate": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "CreateMessageTemplate",
+        "operationId": "fabo.CustomerConversation-CreateMessageTemplate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvCreateMessageTemplateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvMessageTemplate"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/CreatePost": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "CreatePost",
+        "operationId": "fabo.CustomerConversation-CreatePost",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvCreatePostRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvCreatePostResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/DeleteMessageTemplate": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "DeleteMessageTemplate",
+        "operationId": "fabo.CustomerConversation-DeleteMessageTemplate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvDeleteMessageTemplateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/GetCustomerConversationByID": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "GetCustomerConversationByID",
+        "operationId": "fabo.CustomerConversation-GetCustomerConversationByID",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvGetCustomerConversationByIDRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvGetCustomerConversationByIDResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/HideOrUnHideComment": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "HideOrUnHideComment",
+        "operationId": "fabo.CustomerConversation-HideOrUnHideComment",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvHideOrUnHideCommentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/LikeOrUnLikeComment": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "LikeOrUnLikeComment",
+        "operationId": "fabo.CustomerConversation-LikeOrUnLikeComment",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvLikeOrUnLikeCommentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/ListCommentsByExternalPostID": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "ListCommentsByExternalPostID",
+        "operationId": "fabo.CustomerConversation-ListCommentsByExternalPostID",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvListCommentsByExternalPostIDRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvListCommentsByExternalPostIDResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/ListCustomerConversations": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "ListCustomerConversations",
+        "operationId": "fabo.CustomerConversation-ListCustomerConversations",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvListCustomerConversationsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvFbCustomerConversationsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/ListLiveVideos": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "ListLiveVideos",
+        "operationId": "fabo.CustomerConversation-ListLiveVideos",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvListLiveVideosRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvListLiveVideosResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/ListMessages": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "ListMessages",
+        "operationId": "fabo.CustomerConversation-ListMessages",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvListMessagesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvFbMessagesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/MessageTemplateVariables": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "MessageTemplateVariables",
+        "operationId": "fabo.CustomerConversation-MessageTemplateVariables",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvMessageTemplateVariableResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/MessageTemplates": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "MessageTemplates",
+        "operationId": "fabo.CustomerConversation-MessageTemplates",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvMessageTemplateResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/SearchCustomerConversations": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "SearchCustomerConversations",
+        "operationId": "fabo.CustomerConversation-SearchCustomerConversations",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvSearchCustomerConversationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvSearchFbCustomerConversationsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/SendComment": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "SendComment",
+        "operationId": "fabo.CustomerConversation-SendComment",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvSendCommentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvFbExternalComment"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/SendMessage": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "SendMessage",
+        "operationId": "fabo.CustomerConversation-SendMessage",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvSendMessageRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvFbExternalMessage"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/SendPrivateReply": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "SendPrivateReply",
+        "operationId": "fabo.CustomerConversation-SendPrivateReply",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvSendPrivateReplyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/UpdateMessageTemplate": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "UpdateMessageTemplate",
+        "operationId": "fabo.CustomerConversation-UpdateMessageTemplate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvUpdateMessageTemplateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.CustomerConversation/UpdateReadStatus": {
+      "post": {
+        "tags": [
+          "CustomerConversation"
+        ],
+        "summary": "UpdateReadStatus",
+        "operationId": "fabo.CustomerConversation-UpdateReadStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvUpdateReadStatusRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktUpdatedResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.Demo/ListFeeds": {
+      "post": {
+        "tags": [
+          "Demo"
+        ],
+        "summary": "ListFeeds",
+        "operationId": "fabo.Demo-ListFeeds",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvListFeedsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvListFeedsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.Demo/ListLiveVideos": {
+      "post": {
+        "tags": [
+          "Demo"
+        ],
+        "summary": "ListLiveVideos",
+        "operationId": "fabo.Demo-ListLiveVideos",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvDemoListLiveVideosRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvDemoListLiveVideosResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.ExtraShipment/CustomerReturnRate": {
+      "post": {
+        "tags": [
+          "ExtraShipment"
+        ],
+        "summary": "CustomerReturnRate",
+        "operationId": "fabo.ExtraShipment-CustomerReturnRate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvCustomerReturnRateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvCustomerReturnRateResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.Page/CheckPermissions": {
+      "post": {
+        "tags": [
+          "Page"
+        ],
+        "summary": "CheckPermissions",
+        "operationId": "fabo.Page-CheckPermissions",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvCheckPagePermissionsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvCheckPagePermissionsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.Page/ConnectPages": {
+      "post": {
+        "tags": [
+          "Page"
+        ],
+        "summary": "ConnectPages",
+        "operationId": "fabo.Page-ConnectPages",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvConnectPagesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvConnectPagesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.Page/ListPages": {
+      "post": {
+        "tags": [
+          "Page"
+        ],
+        "summary": "ListPages",
+        "operationId": "fabo.Page-ListPages",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvListPagesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvListPagesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.Page/ListPosts": {
+      "post": {
+        "tags": [
+          "Page"
+        ],
+        "summary": "ListPosts",
+        "operationId": "fabo.Page-ListPosts",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvListPostsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvListPostsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.Page/RemovePages": {
+      "post": {
+        "tags": [
+          "Page"
+        ],
+        "summary": "RemovePages",
+        "operationId": "fabo.Page-RemovePages",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvRemovePagesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.Shop/CreateTag": {
+      "post": {
+        "tags": [
+          "Shop"
+        ],
+        "summary": "CreateTag",
+        "operationId": "fabo.Shop-CreateTag",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvCreateFbShopTagRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvFbShopUserTag"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.Shop/DeleteTag": {
+      "post": {
+        "tags": [
+          "Shop"
+        ],
+        "summary": "DeleteTag",
+        "operationId": "fabo.Shop-DeleteTag",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvDeleteFbShopTagRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.Shop/GetTags": {
+      "post": {
+        "tags": [
+          "Shop"
+        ],
+        "summary": "GetTags",
+        "operationId": "fabo.Shop-GetTags",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvListFbShopTagResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.Shop/UpdateTag": {
+      "post": {
+        "tags": [
+          "Shop"
+        ],
+        "summary": "UpdateTag",
+        "operationId": "fabo.Shop-UpdateTag",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvUpdateFbShopTagRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvFbShopUserTag"
+            }
+          }
+        }
+      }
+    },
+    "/api/fabo.Summary/SummaryShop": {
+      "post": {
+        "tags": [
+          "Summary"
+        ],
+        "summary": "SummaryShop",
+        "operationId": "fabo.Summary-SummaryShop",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cvSummaryShopRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/cvSummaryShopResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "asFbCustomerConversationType": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "message",
+        "comment",
+        "live_video",
+        "all"
+      ]
+    },
+    "blStatus": {
+      "type": "string",
+      "enum": [
+        "Z",
+        "P",
+        "N"
+      ]
+    },
+    "cdConnectionMethod": {
+      "description": "Deprecated values: \"topship\"\\n",
+      "type": "string",
+      "enum": [
+        "unknown",
+        "builtin",
+        "direct"
+      ]
+    },
+    "crFbStatusType": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "added_photos",
+        "added_video",
+        "app_created_story",
+        "approved_friend",
+        "created_event",
+        "created_group",
+        "created_note",
+        "mobile_status_update",
+        "published_story",
+        "shared_story",
+        "tagged_in_photo",
+        "wall_post"
+      ]
+    },
+    "cvCheckPagePermissionsRequest": {
+      "type": "object",
+      "properties": {
+        "external_page_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "cvCheckPagePermissionsResponse": {
+      "type": "object",
+      "properties": {
+        "page_missing_roles": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "cvCommentAttachment": {
+      "type": "object",
+      "properties": {
+        "media": {
+          "$ref": "#/definitions/cvImageMediaDataSubAttachment"
+        },
+        "target": {
+          "$ref": "#/definitions/cvTargetDataSubAttachment"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "cvCommentFilter": {
+      "type": "object",
+      "properties": {
+        "external_post_id": {
+          "type": "string"
+        },
+        "external_user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "cvConnectPagesRequest": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string"
+        }
+      }
+    },
+    "cvConnectPagesResponse": {
+      "type": "object",
+      "properties": {
+        "fb_error_pages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvFbErrorPage"
+          }
+        },
+        "fb_pages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvFbPageCombined"
+          }
+        },
+        "fb_user": {
+          "$ref": "#/definitions/cvFbUserCombined"
+        }
+      }
+    },
+    "cvCreateFbShopTagRequest": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "cvCreateFbUserCustomerRequest": {
+      "type": "object",
+      "properties": {
+        "customer_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "external_id": {
+          "type": "string"
+        }
+      }
+    },
+    "cvCreateMessageTemplateRequest": {
+      "type": "object",
+      "properties": {
+        "short_code": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string"
+        }
+      }
+    },
+    "cvCreatePostRequest": {
+      "type": "object",
+      "properties": {
+        "external_page_id": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "cvCreatePostResponse": {
+      "type": "object",
+      "properties": {
+        "external_post_id": {
+          "type": "string"
+        },
+        "external_url": {
+          "type": "string"
+        }
+      }
+    },
+    "cvCustomerConversationFilter": {
+      "type": "object",
+      "properties": {
+        "external_page_id": {
+          "$ref": "#/definitions/kfStrings"
+        },
+        "external_user_id": {
+          "type": "string"
+        },
+        "is_read": {
+          "type": "boolean"
+        },
+        "type": {
+          "$ref": "#/definitions/asFbCustomerConversationType"
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/asFbCustomerConversationType"
+          }
+        }
+      }
+    },
+    "cvCustomerReturnRate": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "type": "string"
+        },
+        "level_code": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "integer",
+          "format": "float32"
+        }
+      }
+    },
+    "cvCustomerReturnRateExtended": {
+      "type": "object",
+      "properties": {
+        "connection_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "connection_method": {
+          "$ref": "#/definitions/cdConnectionMethod"
+        },
+        "connection_name": {
+          "type": "string"
+        },
+        "customer_return_rate": {
+          "$ref": "#/definitions/cvCustomerReturnRate"
+        }
+      }
+    },
+    "cvCustomerReturnRateRequest": {
+      "type": "object",
+      "properties": {
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "cvCustomerReturnRateResponse": {
+      "type": "object",
+      "properties": {
+        "customer_return_rates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvCustomerReturnRateExtended"
+          }
+        }
+      }
+    },
+    "cvCustomerWithFbUserAvatars": {
+      "type": "object",
+      "properties": {
+        "birthday": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "deleted": {
+          "type": "boolean"
+        },
+        "email": {
+          "type": "string"
+        },
+        "external_code": {
+          "type": "string"
+        },
+        "external_id": {
+          "type": "string"
+        },
+        "fb_users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvFbUser"
+          }
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "gender": {
+          "$ref": "#/definitions/pwGender"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "note": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "shop_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "status": {
+          "$ref": "#/definitions/blStatus"
+        },
+        "type": {
+          "$ref": "#/definitions/ljCustomerType"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "cvDeleteFbShopTagRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "cvDeleteMessageTemplateRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "cvDemoListLiveVideosRequest": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "cvDemoListLiveVideosResponse": {
+      "type": "object",
+      "properties": {
+        "videos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvLiveVideoUser"
+          }
+        }
+      }
+    },
+    "cvExternalCategory": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "cvExternalFbUserInfo": {
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "short_name": {
+          "type": "string"
+        }
+      }
+    },
+    "cvFbCommentsResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvFbExternalComment"
+          }
+        },
+        "paging": {
+          "$ref": "#/definitions/ktCursorPageInfo"
+        }
+      }
+    },
+    "cvFbCustomerConversation": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "customer": {
+          "$ref": "#/definitions/mrCustomer"
+        },
+        "external_comment_attachment": {
+          "$ref": "#/definitions/cvCommentAttachment"
+        },
+        "external_from": {
+          "$ref": "#/definitions/cvFbObjectFrom"
+        },
+        "external_id": {
+          "type": "string"
+        },
+        "external_message_attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvFbMessageAttachment"
+          }
+        },
+        "external_page_id": {
+          "type": "string"
+        },
+        "external_post_attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvPostAttachment"
+          }
+        },
+        "external_user_id": {
+          "type": "string"
+        },
+        "external_user_name": {
+          "type": "string"
+        },
+        "external_user_picture_url": {
+          "type": "string"
+        },
+        "external_user_tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "is_read": {
+          "type": "boolean"
+        },
+        "last_customer_message_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "last_message": {
+          "type": "string"
+        },
+        "last_message_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "cvFbCustomerConversationsResponse": {
+      "type": "object",
+      "properties": {
+        "fb_customer_conversations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvFbCustomerConversation"
+          }
+        },
+        "paging": {
+          "$ref": "#/definitions/ktCursorPageInfo"
+        }
+      }
+    },
+    "cvFbErrorPage": {
+      "type": "object",
+      "properties": {
+        "external_id": {
+          "type": "string"
+        },
+        "external_image_url": {
+          "type": "string"
+        },
+        "external_name": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "cvFbExternalComment": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "created_by": {
+          "type": "string",
+          "format": "int64"
+        },
+        "external_attachment": {
+          "$ref": "#/definitions/cvCommentAttachment"
+        },
+        "external_comment_count": {
+          "type": "integer"
+        },
+        "external_created_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "external_from": {
+          "$ref": "#/definitions/cvFbObjectFrom"
+        },
+        "external_id": {
+          "type": "string"
+        },
+        "external_message": {
+          "type": "string"
+        },
+        "external_page_id": {
+          "type": "string"
+        },
+        "external_parent": {
+          "$ref": "#/definitions/cvFbExternalComment"
+        },
+        "external_parent_id": {
+          "type": "string"
+        },
+        "external_parent_user_id": {
+          "type": "string"
+        },
+        "external_post_id": {
+          "type": "string"
+        },
+        "external_user_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "is_hidden": {
+          "type": "boolean"
+        },
+        "is_liked": {
+          "type": "boolean"
+        },
+        "is_private_replied": {
+          "type": "boolean"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "cvFbExternalMessage": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "created_by": {
+          "type": "string",
+          "format": "int64"
+        },
+        "external_attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvFbMessageAttachment"
+          }
+        },
+        "external_conversation_id": {
+          "type": "string"
+        },
+        "external_created_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "external_from": {
+          "$ref": "#/definitions/cvFbObjectFrom"
+        },
+        "external_id": {
+          "type": "string"
+        },
+        "external_message": {
+          "type": "string"
+        },
+        "external_page_id": {
+          "type": "string"
+        },
+        "external_sticker": {
+          "type": "string"
+        },
+        "external_to": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvFbObjectTo"
+          }
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "cvFbExternalPost": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "external_attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvPostAttachment"
+          }
+        },
+        "external_created_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "external_from": {
+          "$ref": "#/definitions/cvFbObjectFrom"
+        },
+        "external_icon": {
+          "type": "string"
+        },
+        "external_id": {
+          "type": "string"
+        },
+        "external_live_video_status": {
+          "type": "string"
+        },
+        "external_message": {
+          "type": "string"
+        },
+        "external_page_id": {
+          "type": "string"
+        },
+        "external_parent": {
+          "$ref": "#/definitions/cvFbExternalPost"
+        },
+        "external_parent_id": {
+          "type": "string"
+        },
+        "external_picture": {
+          "type": "string"
+        },
+        "external_status_type": {
+          "$ref": "#/definitions/crFbStatusType"
+        },
+        "external_user_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "is_live_video": {
+          "type": "boolean"
+        },
+        "live_video_status": {
+          "$ref": "#/definitions/llFbLiveVideoStatus"
+        },
+        "total_comments": {
+          "type": "integer"
+        },
+        "total_reactions": {
+          "type": "integer"
+        },
+        "type": {
+          "$ref": "#/definitions/lxFbPostType"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "cvFbMessageAttachment": {
+      "type": "object",
+      "properties": {
+        "file_url": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "image_data": {
+          "$ref": "#/definitions/cvFbMessageAttachmentImageData"
+        },
+        "mime_type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "video_data": {
+          "$ref": "#/definitions/cvFbMessageDataAttachmentVideoData"
+        }
+      }
+    },
+    "cvFbMessageAttachmentImageData": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "integer"
+        },
+        "image_type": {
+          "type": "integer"
+        },
+        "max_height": {
+          "type": "integer"
+        },
+        "max_width": {
+          "type": "integer"
+        },
+        "preview_url": {
+          "type": "string"
+        },
+        "render_as_sticker": {
+          "type": "boolean"
+        },
+        "url": {
+          "type": "string"
+        },
+        "width": {
+          "type": "integer"
+        }
+      }
+    },
+    "cvFbMessageDataAttachmentVideoData": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "integer"
+        },
+        "length": {
+          "type": "integer"
+        },
+        "preview_url": {
+          "type": "string"
+        },
+        "rotation": {
+          "type": "integer"
+        },
+        "url": {
+          "type": "string"
+        },
+        "video_type": {
+          "type": "integer"
+        },
+        "width": {
+          "type": "integer"
+        }
+      }
+    },
+    "cvFbMessagesResponse": {
+      "type": "object",
+      "properties": {
+        "fb_messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvFbExternalMessage"
+          }
+        },
+        "paging": {
+          "$ref": "#/definitions/ktCursorPageInfo"
+        }
+      }
+    },
+    "cvFbObjectFrom": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "external_user_picture_url": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "cvFbObjectTo": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "external_user_picture_url": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "cvFbPage": {
+      "type": "object",
+      "properties": {
+        "connection_status": {
+          "$ref": "#/definitions/blStatus"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "external_category": {
+          "type": "string"
+        },
+        "external_category_list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvExternalCategory"
+          }
+        },
+        "external_id": {
+          "type": "string"
+        },
+        "external_image_url": {
+          "type": "string"
+        },
+        "external_name": {
+          "type": "string"
+        },
+        "external_permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "external_tasks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "shop_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "status": {
+          "$ref": "#/definitions/blStatus"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "cvFbPageCombined": {
+      "type": "object",
+      "properties": {
+        "connection_status": {
+          "$ref": "#/definitions/blStatus"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "external_category": {
+          "type": "string"
+        },
+        "external_category_list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvExternalCategory"
+          }
+        },
+        "external_id": {
+          "type": "string"
+        },
+        "external_image_url": {
+          "type": "string"
+        },
+        "external_name": {
+          "type": "string"
+        },
+        "external_permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "external_tasks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "external_user_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "shop_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "status": {
+          "$ref": "#/definitions/blStatus"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "cvFbShopUserTag": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "shop_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "cvFbUser": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "external_id": {
+          "type": "string"
+        },
+        "external_info": {
+          "$ref": "#/definitions/cvExternalFbUserInfo"
+        },
+        "status": {
+          "$ref": "#/definitions/blStatus"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "cvFbUserCombined": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "external_id": {
+          "type": "string"
+        },
+        "external_info": {
+          "$ref": "#/definitions/cvExternalFbUserInfo"
+        },
+        "status": {
+          "$ref": "#/definitions/blStatus"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "cvFbUserWithCustomer": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "customer": {
+          "$ref": "#/definitions/mrCustomer"
+        },
+        "customer_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "external_id": {
+          "type": "string"
+        },
+        "external_info": {
+          "$ref": "#/definitions/cvExternalFbUserInfo"
+        },
+        "status": {
+          "$ref": "#/definitions/blStatus"
+        },
+        "tag_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "cvGetCustomerConversationByIDRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "cvGetCustomerConversationByIDResponse": {
+      "type": "object",
+      "properties": {
+        "conversation": {
+          "$ref": "#/definitions/cvFbCustomerConversation"
+        }
+      }
+    },
+    "cvGetFbUserRequest": {
+      "type": "object",
+      "properties": {
+        "external_id": {
+          "type": "string"
+        }
+      }
+    },
+    "cvHideOrUnHideCommentRequest": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/lgFbCommentAction"
+        },
+        "external_comment_id": {
+          "type": "string"
+        },
+        "external_page_id": {
+          "type": "string"
+        }
+      }
+    },
+    "cvImageMediaDataSubAttachment": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/cvMediaDataSubAttachment"
+        }
+      }
+    },
+    "cvImageMediaPostAttachment": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "integer"
+        },
+        "src": {
+          "type": "string"
+        },
+        "width": {
+          "type": "integer"
+        }
+      }
+    },
+    "cvLikeOrUnLikeCommentRequest": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/lgFbCommentAction"
+        },
+        "external_comment_id": {
+          "type": "string"
+        },
+        "external_page_id": {
+          "type": "string"
+        }
+      }
+    },
+    "cvListCommentsByExternalPostIDRequest": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/definitions/cvCommentFilter"
+        },
+        "paging": {
+          "$ref": "#/definitions/ktCursorPaging"
+        }
+      }
+    },
+    "cvListCommentsByExternalPostIDResponse": {
+      "type": "object",
+      "properties": {
+        "fb_comments": {
+          "$ref": "#/definitions/cvFbCommentsResponse"
+        },
+        "fb_post": {
+          "$ref": "#/definitions/cvFbExternalPost"
+        },
+        "latest_customer_fb_external_comment": {
+          "$ref": "#/definitions/cvFbExternalComment"
+        }
+      }
+    },
+    "cvListCustomerConversationsRequest": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/definitions/cvCustomerConversationFilter"
+        },
+        "paging": {
+          "$ref": "#/definitions/ktCursorPaging"
+        }
+      }
+    },
+    "cvListCustomersWithFbUsersRequest": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ktFilter"
+          }
+        },
+        "get_all": {
+          "type": "boolean"
+        },
+        "paging": {
+          "$ref": "#/definitions/ktPaging"
+        }
+      }
+    },
+    "cvListCustomersWithFbUsersResponse": {
+      "type": "object",
+      "properties": {
+        "customers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvCustomerWithFbUserAvatars"
+          }
+        },
+        "paging": {
+          "$ref": "#/definitions/ktPageInfo"
+        }
+      }
+    },
+    "cvListFbShopTagResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvFbShopUserTag"
+          }
+        }
+      }
+    },
+    "cvListFbUsersRequest": {
+      "type": "object",
+      "properties": {
+        "customer_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "cvListFbUsersResponse": {
+      "type": "object",
+      "properties": {
+        "fb_users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvFbUserWithCustomer"
+          }
+        }
+      }
+    },
+    "cvListFeedsRequest": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "cvListFeedsResponse": {
+      "type": "object",
+      "properties": {
+        "feeds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvPostWithComments"
+          }
+        }
+      }
+    },
+    "cvListLiveVideosFilter": {
+      "type": "object",
+      "properties": {
+        "external_page_ids": {
+          "$ref": "#/definitions/kfStrings"
+        },
+        "is_live_video": {
+          "type": "boolean"
+        },
+        "live_video_status": {
+          "$ref": "#/definitions/llFbLiveVideoStatus"
+        },
+        "type": {
+          "$ref": "#/definitions/lxFbPostType"
+        }
+      }
+    },
+    "cvListLiveVideosRequest": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/definitions/cvListLiveVideosFilter"
+        },
+        "paging": {
+          "$ref": "#/definitions/ktCursorPaging"
+        }
+      }
+    },
+    "cvListLiveVideosResponse": {
+      "type": "object",
+      "properties": {
+        "live_videos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvFbExternalPost"
+          }
+        },
+        "paging": {
+          "$ref": "#/definitions/ktCursorPageInfo"
+        }
+      }
+    },
+    "cvListMessagesRequest": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/definitions/cvMessageFilter"
+        },
+        "paging": {
+          "$ref": "#/definitions/ktCursorPaging"
+        }
+      }
+    },
+    "cvListPagesRequest": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ktFilter"
+          }
+        },
+        "paging": {
+          "$ref": "#/definitions/ktPaging"
+        }
+      }
+    },
+    "cvListPagesResponse": {
+      "type": "object",
+      "properties": {
+        "fb_pages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvFbPage"
+          }
+        },
+        "paging": {
+          "$ref": "#/definitions/ktPageInfo"
+        }
+      }
+    },
+    "cvListPostsRequest": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/definitions/cvPostFilter"
+        },
+        "paging": {
+          "$ref": "#/definitions/ktCursorPaging"
+        }
+      }
+    },
+    "cvListPostsResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvFbExternalPost"
+          }
+        },
+        "paging": {
+          "$ref": "#/definitions/ktCursorPageInfo"
+        }
+      }
+    },
+    "cvLiveVideoComment": {
+      "type": "object",
+      "properties": {
+        "created_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "id": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "cvLiveVideoUser": {
+      "type": "object",
+      "properties": {
+        "comments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvLiveVideoComment"
+          }
+        },
+        "created_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "type": "string"
+        },
+        "embed_html": {
+          "type": "string"
+        },
+        "from": {
+          "$ref": "#/definitions/cvFbObjectFrom"
+        },
+        "id": {
+          "type": "string"
+        },
+        "permalink_url": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "video": {
+          "$ref": "#/definitions/cvLiveVideoVideo"
+        }
+      }
+    },
+    "cvLiveVideoVideo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "picture": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        }
+      }
+    },
+    "cvMediaDataSubAttachment": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "integer"
+        },
+        "src": {
+          "type": "string"
+        },
+        "width": {
+          "type": "integer"
+        }
+      }
+    },
+    "cvMediaPostAttachment": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/cvImageMediaPostAttachment"
+        }
+      }
+    },
+    "cvMessageFilter": {
+      "type": "object",
+      "properties": {
+        "external_conversation_id": {
+          "$ref": "#/definitions/kfStrings"
+        },
+        "fb_external_conversation_ids": {
+          "$ref": "#/definitions/kfStrings"
+        }
+      }
+    },
+    "cvMessageSendMessageRequest": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "type": {
+          "description": "Type: text or image\n",
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "cvMessageTemplate": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "shop_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "short_code": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "cvMessageTemplateResponse": {
+      "type": "object",
+      "properties": {
+        "templates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvMessageTemplate"
+          }
+        }
+      }
+    },
+    "cvMessageTemplateVariable": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        }
+      }
+    },
+    "cvMessageTemplateVariableResponse": {
+      "type": "object",
+      "properties": {
+        "variables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvMessageTemplateVariable"
+          }
+        }
+      }
+    },
+    "cvPost": {
+      "type": "object",
+      "properties": {
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvPostAttachment"
+          }
+        },
+        "created_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "from": {
+          "$ref": "#/definitions/cvFbObjectFrom"
+        },
+        "full_picture": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "is_expired": {
+          "type": "boolean"
+        },
+        "is_hidden": {
+          "type": "boolean"
+        },
+        "is_popular": {
+          "type": "boolean"
+        },
+        "is_published": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        },
+        "permalink_url": {
+          "type": "string"
+        },
+        "picture": {
+          "type": "string"
+        },
+        "status_type": {
+          "type": "string"
+        },
+        "story": {
+          "type": "string"
+        },
+        "updated_time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "cvPostAttachment": {
+      "type": "object",
+      "properties": {
+        "media": {
+          "$ref": "#/definitions/cvMediaPostAttachment"
+        },
+        "media_type": {
+          "type": "string"
+        },
+        "sub_attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvSubAttachment"
+          }
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "cvPostComment": {
+      "type": "object",
+      "properties": {
+        "created_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "id": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "cvPostFilter": {
+      "type": "object",
+      "properties": {
+        "external_page_id": {
+          "type": "string"
+        },
+        "external_post_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "external_status_type": {
+          "$ref": "#/definitions/crFbStatusType"
+        }
+      }
+    },
+    "cvPostWithComments": {
+      "type": "object",
+      "properties": {
+        "comments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvPostComment"
+          }
+        },
+        "post": {
+          "$ref": "#/definitions/cvPost"
+        }
+      }
+    },
+    "cvRemovePagesRequest": {
+      "type": "object",
+      "properties": {
+        "external_id": {
+          "$ref": "#/definitions/kfStrings"
+        },
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "cvSearchCustomerConversationRequest": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "cvSearchFbCustomerConversationsResponse": {
+      "type": "object",
+      "properties": {
+        "fb_customer_conversations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cvFbCustomerConversation"
+          }
+        }
+      }
+    },
+    "cvSendCommentRequest": {
+      "type": "object",
+      "properties": {
+        "attachment_url": {
+          "type": "string"
+        },
+        "external_id": {
+          "type": "string"
+        },
+        "external_page_id": {
+          "type": "string"
+        },
+        "external_post_id": {
+          "type": "string"
+        },
+        "external_user_id": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "cvSendMessageRequest": {
+      "type": "object",
+      "properties": {
+        "external_conversation_id": {
+          "type": "string"
+        },
+        "external_page_id": {
+          "type": "string"
+        },
+        "message": {
+          "$ref": "#/definitions/cvMessageSendMessageRequest"
+        }
+      }
+    },
+    "cvSendPrivateReplyRequest": {
+      "type": "object",
+      "properties": {
+        "external_comment_id": {
+          "type": "string"
+        },
+        "external_page_id": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "cvSubAttachment": {
+      "type": "object",
+      "properties": {
+        "media": {
+          "$ref": "#/definitions/cvMediaDataSubAttachment"
+        },
+        "target": {
+          "$ref": "#/definitions/cvTargetDataSubAttachment"
+        },
+        "type": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "cvSummaryShopRequest": {
+      "type": "object",
+      "properties": {
+        "date_from": {
+          "type": "string"
+        },
+        "date_to": {
+          "type": "string"
+        }
+      }
+    },
+    "cvSummaryShopResponse": {
+      "type": "object",
+      "properties": {
+        "tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paSummaryTable"
+          }
+        }
+      }
+    },
+    "cvTargetDataSubAttachment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "cvUpdateFbShopTagRequest": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "cvUpdateMessageTemplateRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "short_code": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string"
+        }
+      }
+    },
+    "cvUpdateReadStatusRequest": {
+      "type": "object",
+      "properties": {
+        "customer_conversation_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "read": {
+          "type": "boolean"
+        }
+      }
+    },
+    "cvUpdateUserTagResponse": {
+      "type": "object",
+      "properties": {
+        "tag_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "cvUpdateUserTagsRequest": {
+      "type": "object",
+      "properties": {
+        "fb_external_user_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tag_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "kfStrings": {
+      "description": "Filter by string value\n",
+      "type": "string"
+    },
+    "ktCursorPageInfo": {
+      "type": "object",
+      "properties": {
+        "after": {
+          "type": "string"
+        },
+        "before": {
+          "type": "string"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "next": {
+          "type": "string"
+        },
+        "prev": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "string"
+        }
+      }
+    },
+    "ktCursorPaging": {
+      "type": "object",
+      "properties": {
+        "after": {
+          "type": "string"
+        },
+        "before": {
+          "type": "string"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "sort": {
+          "type": "string"
+        }
+      }
+    },
+    "ktEmpty": {
+      "type": "object"
+    },
+    "ktFilter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Comma separated properties: \"name,s_name\"\n",
+          "type": "string"
+        },
+        "op": {
+          "description": "Can be = ≠ (!=) \u003c ≤ (\u003c=) \u003e ≥ (\u003e=) ⊃ (c) ∈ (in) ∩ (n)\n\n- Text or set: ⊃ ∩\n- Exactly: = ≠ ∈\n- Numeric: = ≠ ∈ \u003c ≤ \u003e ≥\n- Array: = ≠ (only with value is {})\n",
+          "type": "string"
+        },
+        "value": {
+          "description": "Must always be string\n",
+          "type": "string"
+        }
+      }
+    },
+    "ktPageInfo": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer"
+        },
+        "sort": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "total": {
+          "type": "integer"
+        }
+      }
+    },
+    "ktPaging": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "sort": {
+          "type": "string"
+        }
+      }
+    },
+    "ktUpdatedResponse": {
+      "type": "object",
+      "properties": {
+        "updated": {
+          "type": "integer"
+        }
+      }
+    },
+    "lgFbCommentAction": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "like",
+        "unlike",
+        "hide",
+        "unhide"
+      ]
+    },
+    "ljCustomerType": {
+      "description": "Deprecated values: \"independent\"\\n",
+      "type": "string",
+      "enum": [
+        "unknown",
+        "individual",
+        "organization",
+        "anonymous"
+      ]
+    },
+    "llFbLiveVideoStatus": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "created",
+        "live",
+        "live_stopped",
+        "cancelled"
+      ]
+    },
+    "lxFbPostType": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "page",
+        "user"
+      ]
+    },
+    "mrCustomer": {
+      "type": "object",
+      "properties": {
+        "birthday": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "deleted": {
+          "type": "boolean"
+        },
+        "email": {
+          "type": "string"
+        },
+        "external_code": {
+          "type": "string"
+        },
+        "external_id": {
+          "type": "string"
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "gender": {
+          "$ref": "#/definitions/pwGender"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "note": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "shop_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "status": {
+          "$ref": "#/definitions/blStatus"
+        },
+        "type": {
+          "$ref": "#/definitions/ljCustomerType"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "paSummaryColRow": {
+      "type": "object",
+      "properties": {
+        "indent": {
+          "type": "integer"
+        },
+        "label": {
+          "type": "string"
+        },
+        "spec": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        }
+      }
+    },
+    "paSummaryItem": {
+      "type": "object",
+      "properties": {
+        "image_urls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "label": {
+          "type": "string"
+        },
+        "spec": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "paSummaryTable": {
+      "type": "object",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paSummaryColRow"
+          }
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paSummaryItem"
+          }
+        },
+        "label": {
+          "type": "string"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paSummaryColRow"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "pwGender": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "male",
+        "female",
+        "other"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "Customer"
+    },
+    {
+      "name": "CustomerConversation"
+    },
+    {
+      "name": "Demo"
+    },
+    {
+      "name": "ExtraShipment"
+    },
+    {
+      "name": "Page"
+    },
+    {
+      "name": "Shop"
+    },
+    {
+      "name": "Summary"
+    }
+  ]
+}

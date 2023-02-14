@@ -1,0 +1,7 @@
+rules:
+- selectorRegexp: "o[.]o"
+  allowedPrefixes:
+  - o.o/backend/doc
+  - o.o/backend/pkg/common
+  - o.o/backend/res/dl
+  - o.o/common

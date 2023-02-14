@@ -1,0 +1,73 @@
+redis:
+  host: redis
+  port: "6379"
+  username: ""
+  password: ""
+http:
+  host: ""
+  port: 8090
+kafka:
+  enabled: true
+  brokers:
+  - kafka:9092
+  topic_prefix: d
+telegram_bot:
+  token: "993929019:AAELLglN9Ui_ck9MJmnFASihIuRL1R0Np94"
+  chats: {
+    'default': -1001236698623,
+    'high': -1001236698623,
+    'deploy': -1001236698623,
+    'shipment_carrier': -1001236698623,
+    'webhook': -1001236698623
+  }
+onesignal:
+  api_key: ""
+  app_id: ""
+secret: secret
+env: dev
+url:
+  auth: http://localhost:8080
+  main_site: http://localhost:8080
+postgres:
+  protocol: ""
+  host: postgres
+  port: 5432
+  username: postgres
+  password: postgres
+  database: fabo
+  sslmode: ""
+  timeout: 15
+  max_open_conns: 0
+  max_idle_conns: 0
+  max_conn_lifetime: 0
+  google_auth_file: ""
+postgres_notifier:
+  protocol: ""
+  host: postgres
+  port: 5432
+  username: postgres
+  password: postgres
+  database: fabo
+  sslmode: ""
+  timeout: 15
+  max_open_conns: 0
+  max_idle_conns: 0
+  max_conn_lifetime: 0
+  google_auth_file: ""
+postgres_webhook:
+  protocol: ""
+  host: postgres
+  port: 5432
+  username: postgres
+  password: postgres
+  database: fabo
+  sslmode: ""
+  timeout: 15
+  max_open_conns: 0
+  max_idle_conns: 0
+  max_conn_lifetime: 0
+  google_auth_file: ""
+facebook_app:
+  id: "1581362285363031"
+  secret: b3962ddf033b295c2bd0b543fff904f7
+  access_token: 1581362285363031|eLuNU9-1KNA0AMNucV9PQIHCF1A

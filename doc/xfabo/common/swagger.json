@@ -1,0 +1,3804 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "API Document",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/etop.AccountRelationship/CreateInvitation": {
+      "post": {
+        "tags": [
+          "AccountRelationship"
+        ],
+        "summary": "CreateInvitation",
+        "operationId": "etop.AccountRelationship-CreateInvitation",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baCreateInvitationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baInvitation"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.AccountRelationship/DeleteInvitation": {
+      "post": {
+        "tags": [
+          "AccountRelationship"
+        ],
+        "summary": "DeleteInvitation",
+        "operationId": "etop.AccountRelationship-DeleteInvitation",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baDeleteInvitationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktUpdatedResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.AccountRelationship/GetInvitations": {
+      "post": {
+        "tags": [
+          "AccountRelationship"
+        ],
+        "summary": "GetInvitations",
+        "operationId": "etop.AccountRelationship-GetInvitations",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baGetInvitationsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baInvitationsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.AccountRelationship/GetRelationships": {
+      "post": {
+        "tags": [
+          "AccountRelationship"
+        ],
+        "summary": "GetRelationships",
+        "operationId": "etop.AccountRelationship-GetRelationships",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baGetRelationshipsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baRelationshipsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.AccountRelationship/RemoveUser": {
+      "post": {
+        "tags": [
+          "AccountRelationship"
+        ],
+        "summary": "RemoveUser",
+        "operationId": "etop.AccountRelationship-RemoveUser",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baRemoveUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktUpdatedResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.AccountRelationship/ResendInvitation": {
+      "post": {
+        "tags": [
+          "AccountRelationship"
+        ],
+        "summary": "ResendInvitation",
+        "operationId": "etop.AccountRelationship-ResendInvitation",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baResendInvitationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baInvitation"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.AccountRelationship/UpdatePermission": {
+      "post": {
+        "tags": [
+          "AccountRelationship"
+        ],
+        "summary": "UpdatePermission",
+        "operationId": "etop.AccountRelationship-UpdatePermission",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baUpdateAccountUserPermissionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baRelationship"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.AccountRelationship/UpdateRelationship": {
+      "post": {
+        "tags": [
+          "AccountRelationship"
+        ],
+        "summary": "UpdateRelationship",
+        "operationId": "etop.AccountRelationship-UpdateRelationship",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baUpdateRelationshipRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baRelationship"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.Address/CreateAddress": {
+      "post": {
+        "tags": [
+          "Address"
+        ],
+        "summary": "CreateAddress",
+        "operationId": "etop.Address-CreateAddress",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baCreateAddressRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baAddress"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.Address/GetAddresses": {
+      "post": {
+        "tags": [
+          "Address"
+        ],
+        "summary": "GetAddresses",
+        "operationId": "etop.Address-GetAddresses",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baGetAddressResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.Address/RemoveAddress": {
+      "post": {
+        "tags": [
+          "Address"
+        ],
+        "summary": "RemoveAddress",
+        "operationId": "etop.Address-RemoveAddress",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ktIDRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.Address/UpdateAddress": {
+      "post": {
+        "tags": [
+          "Address"
+        ],
+        "summary": "UpdateAddress",
+        "operationId": "etop.Address-UpdateAddress",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baUpdateAddressRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baAddress"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.Bank/GetBankBranches": {
+      "post": {
+        "tags": [
+          "Bank"
+        ],
+        "summary": "GetBankBranches",
+        "operationId": "etop.Bank-GetBankBranches",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baGetBankBranchesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baGetBankBranchesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.Bank/GetBankProvinces": {
+      "post": {
+        "tags": [
+          "Bank"
+        ],
+        "summary": "GetBankProvinces",
+        "operationId": "etop.Bank-GetBankProvinces",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baGetBankProvincesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baGetBankProvinceResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.Bank/GetBanks": {
+      "post": {
+        "tags": [
+          "Bank"
+        ],
+        "summary": "GetBanks",
+        "operationId": "etop.Bank-GetBanks",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baGetBanksResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.Bank/GetBranchesByBankProvince": {
+      "post": {
+        "tags": [
+          "Bank"
+        ],
+        "summary": "GetBranchesByBankProvince",
+        "operationId": "etop.Bank-GetBranchesByBankProvince",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baGetBranchesByBankProvinceResquest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baGetBranchesByBankProvinceResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.Bank/GetProvincesByBank": {
+      "post": {
+        "tags": [
+          "Bank"
+        ],
+        "summary": "GetProvincesByBank",
+        "operationId": "etop.Bank-GetProvincesByBank",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baGetProvincesByBankResquest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baGetBankProvincesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.Location/GetDistricts": {
+      "post": {
+        "tags": [
+          "Location"
+        ],
+        "summary": "GetDistricts",
+        "operationId": "etop.Location-GetDistricts",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baGetDistrictsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.Location/GetDistrictsByProvince": {
+      "post": {
+        "tags": [
+          "Location"
+        ],
+        "summary": "GetDistrictsByProvince",
+        "operationId": "etop.Location-GetDistrictsByProvince",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baGetDistrictsByProvinceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baGetDistrictsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.Location/GetProvinces": {
+      "post": {
+        "tags": [
+          "Location"
+        ],
+        "summary": "GetProvinces",
+        "operationId": "etop.Location-GetProvinces",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baGetProvincesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.Location/GetWards": {
+      "post": {
+        "tags": [
+          "Location"
+        ],
+        "summary": "GetWards",
+        "operationId": "etop.Location-GetWards",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baGetWardsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.Location/GetWardsByDistrict": {
+      "post": {
+        "tags": [
+          "Location"
+        ],
+        "summary": "GetWardsByDistrict",
+        "operationId": "etop.Location-GetWardsByDistrict",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baGetWardsByDistrictRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baGetWardsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.Location/ParseLocation": {
+      "post": {
+        "tags": [
+          "Location"
+        ],
+        "summary": "ParseLocation",
+        "operationId": "etop.Location-ParseLocation",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baParseLocationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baParseLocationResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.Misc/VersionInfo": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "VersionInfo",
+        "operationId": "etop.Misc-VersionInfo",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktVersionInfoResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/ChangePassword": {
+      "post": {
+        "description": "Change the user password\n",
+        "tags": [
+          "User"
+        ],
+        "summary": "ChangePassword",
+        "operationId": "etop.User-ChangePassword",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baChangePasswordRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/ChangePasswordUsingToken": {
+      "post": {
+        "description": "Reset password by providing the token sent to email or phone\n",
+        "tags": [
+          "User"
+        ],
+        "summary": "ChangePasswordUsingToken",
+        "operationId": "etop.User-ChangePasswordUsingToken",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baChangePasswordUsingTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/ChangeRefAff": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "ChangeRefAff",
+        "operationId": "etop.User-ChangeRefAff",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baChangeUserRefAffRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/CheckUserRegistration": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "CheckUserRegistration",
+        "operationId": "etop.User-CheckUserRegistration",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baGetUserByPhoneRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baGetUserByPhoneResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/DisableNotifyTopic": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "DisableNotifyTopic",
+        "operationId": "etop.User-DisableNotifyTopic",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baUpdateNotifyTopicRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baGetNotifySettingResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/EnableNotifyTopic": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "EnableNotifyTopic",
+        "operationId": "etop.User-EnableNotifyTopic",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baUpdateNotifyTopicRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baGetNotifySettingResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/GetNotifySetting": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "GetNotifySetting",
+        "operationId": "etop.User-GetNotifySetting",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baGetNotifySettingResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/InitSession": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "InitSession",
+        "operationId": "etop.User-InitSession",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baLoginResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/Login": {
+      "post": {
+        "description": "Log the user in and generate access token.\n",
+        "tags": [
+          "User"
+        ],
+        "summary": "Login",
+        "operationId": "etop.User-Login",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baLoginRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baLoginResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/Register": {
+      "post": {
+        "description": "Register a new user or after a user has login using generated password.\n",
+        "tags": [
+          "User"
+        ],
+        "summary": "Register",
+        "operationId": "etop.User-Register",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baCreateUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baRegisterResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/RegisterSimplify": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "RegisterSimplify",
+        "operationId": "etop.User-RegisterSimplify",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baRegisterSimplifyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baLoginResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/RegisterUsingToken": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "RegisterUsingToken",
+        "operationId": "etop.User-RegisterUsingToken",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baCreateUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baRegisterResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/RequestRegisterSimplify": {
+      "post": {
+        "description": "Request OTP for register/login\n",
+        "tags": [
+          "User"
+        ],
+        "summary": "RequestRegisterSimplify",
+        "operationId": "etop.User-RequestRegisterSimplify",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baRequestRegisterSimplifyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktMessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/ResetPassword": {
+      "post": {
+        "description": "Send email or sms to allow the user reset their password.\n",
+        "tags": [
+          "User"
+        ],
+        "summary": "ResetPassword",
+        "operationId": "etop.User-ResetPassword",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baResetPasswordRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baResetPasswordResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/SendEmailVerification": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "SendEmailVerification",
+        "operationId": "etop.User-SendEmailVerification",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baSendEmailVerificationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktMessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/SendEmailVerificationUsingOTP": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "SendEmailVerificationUsingOTP",
+        "operationId": "etop.User-SendEmailVerificationUsingOTP",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baSendEmailVerificationUsingOTPRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktMessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/SendPhoneVerification": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "SendPhoneVerification",
+        "operationId": "etop.User-SendPhoneVerification",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baSendPhoneVerificationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktMessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/SendSTokenEmail": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "SendSTokenEmail",
+        "operationId": "etop.User-SendSTokenEmail",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baSendSTokenEmailRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktMessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/SessionInfo": {
+      "post": {
+        "description": "Return current session info.\n",
+        "tags": [
+          "User"
+        ],
+        "summary": "SessionInfo",
+        "operationId": "etop.User-SessionInfo",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ktEmpty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baLoginResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/SwitchAccount": {
+      "post": {
+        "description": "Response error if the user does not have permission to the requested account.\n",
+        "tags": [
+          "User"
+        ],
+        "summary": "SwitchAccount",
+        "operationId": "etop.User-SwitchAccount",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baSwitchAccountRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baAccessTokenResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/UpdatePermission": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "UpdatePermission",
+        "operationId": "etop.User-UpdatePermission",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baUpdatePermissionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baUpdatePermissionResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/UpdateReferenceSale": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "UpdateReferenceSale",
+        "operationId": "etop.User-UpdateReferenceSale",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baUpdateReferenceSaleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktUpdatedResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/UpdateReferenceUser": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "UpdateReferenceUser",
+        "operationId": "etop.User-UpdateReferenceUser",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baUpdateReferenceUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktUpdatedResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/UpdateUserEmail": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "UpdateUserEmail",
+        "operationId": "etop.User-UpdateUserEmail",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baUpdateUserEmailRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baUpdateUserEmailResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/UpdateUserPhone": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "UpdateUserPhone",
+        "operationId": "etop.User-UpdateUserPhone",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baUpdateUserPhoneRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baUpdateUserPhoneResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/UpgradeAccessToken": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "UpgradeAccessToken",
+        "operationId": "etop.User-UpgradeAccessToken",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baUpgradeAccessTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baAccessTokenResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/VerifyEmailUsingOTP": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "VerifyEmailUsingOTP",
+        "operationId": "etop.User-VerifyEmailUsingOTP",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baVerifyEmailUsingOTPRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktMessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/VerifyEmailUsingToken": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "VerifyEmailUsingToken",
+        "operationId": "etop.User-VerifyEmailUsingToken",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baVerifyEmailUsingTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktMessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/VerifyPhoneResetPasswordUsingToken": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "VerifyPhoneResetPasswordUsingToken",
+        "operationId": "etop.User-VerifyPhoneResetPasswordUsingToken",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baVerifyPhoneResetPasswordUsingTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baVerifyPhoneResetPasswordUsingTokenResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/VerifyPhoneUsingToken": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "VerifyPhoneUsingToken",
+        "operationId": "etop.User-VerifyPhoneUsingToken",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baVerifyPhoneUsingTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktMessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/WebphoneLogin": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "WebphoneLogin",
+        "operationId": "etop.User-WebphoneLogin",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baWebphoneLoginRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baLoginResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.User/WebphoneRequestLogin": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "WebphoneRequestLogin",
+        "operationId": "etop.User-WebphoneRequestLogin",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baWebphoneRequestLoginRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baWebphoneRequestLoginResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.UserRelationship/AcceptInvitation": {
+      "post": {
+        "tags": [
+          "UserRelationship"
+        ],
+        "summary": "AcceptInvitation",
+        "operationId": "etop.UserRelationship-AcceptInvitation",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baAcceptInvitationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktUpdatedResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.UserRelationship/GetInvitationByToken": {
+      "post": {
+        "tags": [
+          "UserRelationship"
+        ],
+        "summary": "GetInvitationByToken",
+        "operationId": "etop.UserRelationship-GetInvitationByToken",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baGetInvitationByTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baInvitation"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.UserRelationship/GetInvitations": {
+      "post": {
+        "tags": [
+          "UserRelationship"
+        ],
+        "summary": "GetInvitations",
+        "operationId": "etop.UserRelationship-GetInvitations",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baGetInvitationsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/baInvitationsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.UserRelationship/LeaveAccount": {
+      "post": {
+        "tags": [
+          "UserRelationship"
+        ],
+        "summary": "LeaveAccount",
+        "operationId": "etop.UserRelationship-LeaveAccount",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baUserRelationshipLeaveAccountRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktUpdatedResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/etop.UserRelationship/RejectInvitation": {
+      "post": {
+        "tags": [
+          "UserRelationship"
+        ],
+        "summary": "RejectInvitation",
+        "operationId": "etop.UserRelationship-RejectInvitation",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/baRejectInvitationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ktUpdatedResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "adAddressType": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "general",
+        "warehouse",
+        "shipto",
+        "shipfrom"
+      ]
+    },
+    "baAcceptInvitationRequest": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "baAccessTokenResponse": {
+      "type": "object",
+      "required": [
+        "access_token",
+        "expires_in",
+        "user"
+      ],
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "account": {
+          "$ref": "#/definitions/baLoginAccount"
+        },
+        "affiliate": {
+          "$ref": "#/definitions/baAffiliate"
+        },
+        "expires_in": {
+          "type": "integer"
+        },
+        "shop": {
+          "$ref": "#/definitions/baShop"
+        },
+        "stoken": {
+          "type": "boolean"
+        },
+        "stoken_expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "user": {
+          "$ref": "#/definitions/baUser"
+        }
+      }
+    },
+    "baAddress": {
+      "type": "object",
+      "properties": {
+        "address1": {
+          "type": "string"
+        },
+        "address2": {
+          "type": "string"
+        },
+        "coordinates": {
+          "$ref": "#/definitions/baCoordinates"
+        },
+        "country": {
+          "type": "string"
+        },
+        "district": {
+          "type": "string"
+        },
+        "district_code": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "exported_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "first_name": {
+          "description": "**Deprecated:** use full_name instead\n",
+          "type": "string"
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "last_name": {
+          "description": "**Deprecated:** use full_name instead\n",
+          "type": "string"
+        },
+        "notes": {
+          "$ref": "#/definitions/baAddressNote"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string"
+        },
+        "province": {
+          "type": "string"
+        },
+        "province_code": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/adAddressType"
+        },
+        "ward": {
+          "type": "string"
+        },
+        "ward_code": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
+        }
+      }
+    },
+    "baAddressNote": {
+      "type": "object",
+      "properties": {
+        "lunch_break": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "open_time": {
+          "type": "string"
+        },
+        "other": {
+          "type": "string"
+        }
+      }
+    },
+    "baAffiliate": {
+      "type": "object",
+      "properties": {
+        "bank_account": {
+          "$ref": "#/definitions/baBankAccount"
+        },
+        "email": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "is_test": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/blStatus"
+        }
+      }
+    },
+    "baBank": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "baBankAccount": {
+      "type": "object",
+      "properties": {
+        "account_name": {
+          "type": "string"
+        },
+        "account_number": {
+          "type": "string"
+        },
+        "branch": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "province": {
+          "type": "string"
+        }
+      }
+    },
+    "baBankBranch": {
+      "type": "object",
+      "properties": {
+        "bank_code": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "province_code": {
+          "type": "string"
+        }
+      }
+    },
+    "baBankProvince": {
+      "type": "object",
+      "properties": {
+        "bank_code": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "baChangePasswordRequest": {
+      "description": "Exactly one of current_password or reset_password_token must be provided.\n",
+      "type": "object",
+      "required": [
+        "current_password",
+        "new_password",
+        "confirm_password"
+      ],
+      "properties": {
+        "confirm_password": {
+          "type": "string"
+        },
+        "current_password": {
+          "type": "string"
+        },
+        "new_password": {
+          "type": "string"
+        }
+      }
+    },
+    "baChangePasswordUsingTokenRequest": {
+      "description": "Exactly one of email or phone must be provided.\n",
+      "type": "object",
+      "required": [
+        "reset_password_token",
+        "new_password",
+        "confirm_password"
+      ],
+      "properties": {
+        "confirm_password": {
+          "type": "string"
+        },
+        "new_password": {
+          "type": "string"
+        },
+        "reset_password_token": {
+          "type": "string"
+        }
+      }
+    },
+    "baChangeUserRefAffRequest": {
+      "type": "object",
+      "properties": {
+        "ref_aff": {
+          "type": "string"
+        }
+      }
+    },
+    "baCompanyInfo": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "legal_representative": {
+          "$ref": "#/definitions/baContactPerson"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tax_code": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string"
+        }
+      }
+    },
+    "baContactPerson": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string"
+        }
+      }
+    },
+    "baCoordinates": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "integer",
+          "format": "float32"
+        },
+        "longitude": {
+          "type": "integer",
+          "format": "float32"
+        }
+      }
+    },
+    "baCreateAddressRequest": {
+      "type": "object",
+      "required": [
+        "province",
+        "district",
+        "ward"
+      ],
+      "properties": {
+        "address1": {
+          "type": "string"
+        },
+        "address2": {
+          "type": "string"
+        },
+        "coordinates": {
+          "$ref": "#/definitions/baCoordinates"
+        },
+        "country": {
+          "type": "string"
+        },
+        "district": {
+          "type": "string"
+        },
+        "district_code": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "notes": {
+          "$ref": "#/definitions/baAddressNote"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string"
+        },
+        "province": {
+          "type": "string"
+        },
+        "province_code": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/adAddressType"
+        },
+        "ward": {
+          "type": "string"
+        },
+        "ward_code": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
+        }
+      }
+    },
+    "baCreateInvitationRequest": {
+      "type": "object",
+      "required": [
+        "email",
+        "phone",
+        "roles"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "full_name": {
+          "description": "@Optional\n",
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "short_name": {
+          "type": "string"
+        }
+      }
+    },
+    "baCreateUserRequest": {
+      "type": "object",
+      "required": [
+        "full_name",
+        "phone",
+        "password",
+        "agree_tos",
+        "agree_email_info"
+      ],
+      "properties": {
+        "agree_email_info": {
+          "type": "boolean"
+        },
+        "agree_tos": {
+          "type": "boolean"
+        },
+        "auto_accept_invitation": {
+          "type": "boolean"
+        },
+        "email": {
+          "description": "It's not required if the user provides register_token\n",
+          "type": "string"
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "ref_aff": {
+          "type": "string"
+        },
+        "ref_sale": {
+          "type": "string"
+        },
+        "register_token": {
+          "description": "This field must be set if the user uses generated password to register.\nAutomatically set phone_verified if it's sent within a specific time.\n",
+          "type": "string"
+        },
+        "short_name": {
+          "description": "Can be automatically deduce from full_name.\n",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/djUserSource"
+        }
+      }
+    },
+    "baDeleteInvitationRequest": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "baDistrict": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "is_freeship": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "province_code": {
+          "type": "string"
+        }
+      }
+    },
+    "baGetAddressResponse": {
+      "type": "object",
+      "properties": {
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/baAddress"
+          }
+        }
+      }
+    },
+    "baGetBankBranchesRequest": {
+      "type": "object",
+      "properties": {
+        "all": {
+          "type": "boolean"
+        },
+        "bank_code": {
+          "type": "string"
+        },
+        "bank_name": {
+          "type": "string"
+        }
+      }
+    },
+    "baGetBankBranchesResponse": {
+      "type": "object",
+      "properties": {
+        "branches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/baBankBranch"
+          }
+        }
+      }
+    },
+    "baGetBankProvinceResponse": {
+      "type": "object",
+      "properties": {
+        "provinces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/baBankProvince"
+          }
+        }
+      }
+    },
+    "baGetBankProvincesRequest": {
+      "type": "object",
+      "properties": {
+        "all": {
+          "type": "boolean"
+        },
+        "bank_code": {
+          "type": "string"
+        },
+        "bank_name": {
+          "type": "string"
+        }
+      }
+    },
+    "baGetBankProvincesResponse": {
+      "type": "object",
+      "properties": {
+        "provinces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/baBankProvince"
+          }
+        }
+      }
+    },
+    "baGetBanksResponse": {
+      "type": "object",
+      "properties": {
+        "banks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/baBank"
+          }
+        }
+      }
+    },
+    "baGetBranchesByBankProvinceResponse": {
+      "type": "object",
+      "properties": {
+        "branches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/baBankBranch"
+          }
+        }
+      }
+    },
+    "baGetBranchesByBankProvinceResquest": {
+      "type": "object",
+      "properties": {
+        "bank_code": {
+          "type": "string"
+        },
+        "bank_name": {
+          "type": "string"
+        },
+        "province_code": {
+          "type": "string"
+        },
+        "province_name": {
+          "type": "string"
+        }
+      }
+    },
+    "baGetDistrictsByProvinceRequest": {
+      "type": "object",
+      "properties": {
+        "province_code": {
+          "type": "string"
+        },
+        "province_name": {
+          "type": "string"
+        }
+      }
+    },
+    "baGetDistrictsResponse": {
+      "type": "object",
+      "properties": {
+        "districts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/baDistrict"
+          }
+        }
+      }
+    },
+    "baGetInvitationByTokenRequest": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "baGetInvitationsRequest": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ktFilter"
+          }
+        },
+        "paging": {
+          "$ref": "#/definitions/ktPaging"
+        }
+      }
+    },
+    "baGetNotifySettingResponse": {
+      "type": "object",
+      "properties": {
+        "topics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/baNotifyTopic"
+          }
+        },
+        "user_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "baGetProvincesByBankResquest": {
+      "type": "object",
+      "properties": {
+        "bank_code": {
+          "type": "string"
+        },
+        "bank_name": {
+          "type": "string"
+        }
+      }
+    },
+    "baGetProvincesResponse": {
+      "type": "object",
+      "properties": {
+        "provinces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/baProvince"
+          }
+        }
+      }
+    },
+    "baGetRelationshipsRequest": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ktFilter"
+          }
+        },
+        "paging": {
+          "$ref": "#/definitions/ktPaging"
+        }
+      }
+    },
+    "baGetUserByPhoneRequest": {
+      "type": "object",
+      "required": [
+        "phone"
+      ],
+      "properties": {
+        "phone": {
+          "type": "string"
+        },
+        "recaptcha_token": {
+          "type": "string"
+        }
+      }
+    },
+    "baGetUserByPhoneResponse": {
+      "type": "object",
+      "required": [
+        "exists"
+      ],
+      "properties": {
+        "exists": {
+          "type": "boolean"
+        }
+      }
+    },
+    "baGetWardsByDistrictRequest": {
+      "type": "object",
+      "properties": {
+        "district_code": {
+          "type": "string"
+        },
+        "district_name": {
+          "type": "string"
+        }
+      }
+    },
+    "baGetWardsResponse": {
+      "type": "object",
+      "properties": {
+        "wards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/baWard"
+          }
+        }
+      }
+    },
+    "baInvitation": {
+      "type": "object",
+      "properties": {
+        "accepted_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "declined_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "email": {
+          "type": "string"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "invitation_url": {
+          "type": "string"
+        },
+        "invited_by": {
+          "type": "string",
+          "format": "int64"
+        },
+        "invited_by_user": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "shop": {
+          "$ref": "#/definitions/baShopShort"
+        },
+        "shop_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "short_name": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/blStatus"
+        },
+        "token": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "user_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "baInvitationsResponse": {
+      "type": "object",
+      "properties": {
+        "invitations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/baInvitation"
+          }
+        },
+        "paging": {
+          "$ref": "#/definitions/ktPageInfo"
+        }
+      }
+    },
+    "baLoginAccount": {
+      "description": "Represents an account associated with the current user. It has extra fields to represents relation with the user.\n",
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "type"
+      ],
+      "properties": {
+        "access_token": {
+          "description": "Associated token for the account. It's returned when calling Login or\nSwitchAccount with regenerate_tokens set to true.\n",
+          "type": "string"
+        },
+        "expires_in": {
+          "description": "The same as access_token.\n",
+          "type": "integer"
+        },
+        "exported_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/jjAccountType"
+        },
+        "url_slug": {
+          "type": "string"
+        },
+        "user_account": {
+          "$ref": "#/definitions/baUserAccountInfo"
+        }
+      }
+    },
+    "baLoginRequest": {
+      "type": "object",
+      "required": [
+        "login",
+        "password"
+      ],
+      "properties": {
+        "account_id": {
+          "description": "Automatically switch to this account if available.\n\nIt's *ignored* if the user *does not* have permission to this account.\n",
+          "type": "string",
+          "format": "int64"
+        },
+        "account_key": {
+          "description": "Not implemented.\n",
+          "type": "string"
+        },
+        "account_type": {
+          "allOf": [
+            {
+              "description": "Automatically switch to the only account of this account type if available.\n\nIt's *ignored* if the user *does not* have any account of this account type, or if the user *has more than one* account of this account type.\n"
+            },
+            {
+              "$ref": "#/definitions/jjAccountType"
+            }
+          ]
+        },
+        "login": {
+          "description": " Phone or email\n",
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "baLoginResponse": {
+      "type": "object",
+      "required": [
+        "access_token",
+        "expires_in",
+        "user",
+        "available_accounts"
+      ],
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "account": {
+          "$ref": "#/definitions/baLoginAccount"
+        },
+        "affiliate": {
+          "$ref": "#/definitions/baAffiliate"
+        },
+        "available_accounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/baLoginAccount"
+          }
+        },
+        "expires_in": {
+          "type": "integer"
+        },
+        "invitation_accounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/baUserAccountInfo"
+          }
+        },
+        "shop": {
+          "$ref": "#/definitions/baShop"
+        },
+        "stoken": {
+          "type": "boolean"
+        },
+        "stoken_expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "user": {
+          "$ref": "#/definitions/baUser"
+        }
+      }
+    },
+    "baNotifyTopic": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "topic": {
+          "type": "string"
+        }
+      }
+    },
+    "baParseLocationRequest": {
+      "type": "object",
+      "properties": {
+        "district_name": {
+          "type": "string"
+        },
+        "province_name": {
+          "type": "string"
+        },
+        "ward_name": {
+          "type": "string"
+        }
+      }
+    },
+    "baParseLocationResponse": {
+      "type": "object",
+      "properties": {
+        "district": {
+          "$ref": "#/definitions/baDistrict"
+        },
+        "province": {
+          "$ref": "#/definitions/baProvince"
+        },
+        "ward": {
+          "$ref": "#/definitions/baWard"
+        }
+      }
+    },
+    "baPermission": {
+      "description": "Represents permission of the current user relation with an account.\n",
+      "type": "object",
+      "properties": {
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "baProvince": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        }
+      }
+    },
+    "baRegisterResponse": {
+      "type": "object",
+      "required": [
+        "user"
+      ],
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/baUser"
+        }
+      }
+    },
+    "baRegisterSimplifyRequest": {
+      "type": "object",
+      "required": [
+        "phone",
+        "otp"
+      ],
+      "properties": {
+        "otp": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "baRejectInvitationRequest": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "baRelationship": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "deleted": {
+          "type": "boolean"
+        },
+        "email": {
+          "type": "string"
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "phone": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "short_name": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "baRelationshipsResponse": {
+      "type": "object",
+      "properties": {
+        "paging": {
+          "$ref": "#/definitions/ktPageInfo"
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/baRelationship"
+          }
+        }
+      }
+    },
+    "baRemoveUserRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "baRequestRegisterSimplifyRequest": {
+      "type": "object",
+      "required": [
+        "phone"
+      ],
+      "properties": {
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "baResendInvitationRequest": {
+      "type": "object",
+      "required": [
+        "email",
+        "phone"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "baResetPasswordRequest": {
+      "description": "Exactly one of phone or email must be provided.\n",
+      "type": "object",
+      "properties": {
+        "email": {
+          "description": "Email address to send reset password instruction.\n",
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "recaptcha_token": {
+          "type": "string"
+        }
+      }
+    },
+    "baResetPasswordResponse": {
+      "type": "object",
+      "required": [
+        "access_token",
+        "expires_in"
+      ],
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "expires_in": {
+          "type": "integer"
+        },
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "baSendEmailVerificationRequest": {
+      "type": "object",
+      "required": [
+        "email"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "baSendEmailVerificationUsingOTPRequest": {
+      "type": "object",
+      "required": [
+        "email"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "baSendPhoneVerificationRequest": {
+      "type": "object",
+      "required": [
+        "phone"
+      ],
+      "properties": {
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "baSendSTokenEmailRequest": {
+      "type": "object",
+      "required": [
+        "email",
+        "account_id"
+      ],
+      "properties": {
+        "account_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "baShippingServiceSelectStrategyItem": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "baShop": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/baAddress"
+        },
+        "auto_create_ffm": {
+          "type": "boolean"
+        },
+        "bank_account": {
+          "$ref": "#/definitions/baBankAccount"
+        },
+        "block_reason": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "company_info": {
+          "$ref": "#/definitions/baCompanyInfo"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "email": {
+          "type": "string"
+        },
+        "exported_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ghn_note_code": {
+          "allOf": [
+            {
+              "description": "**Deprecated:** use try_on instead\n"
+            },
+            {
+              "$ref": "#/definitions/pjGHNNoteCode"
+            }
+          ]
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "inventory_overstock": {
+          "type": "boolean"
+        },
+        "is_blocked": {
+          "type": "boolean"
+        },
+        "is_prior_money_transaction": {
+          "type": "boolean"
+        },
+        "is_test": {
+          "type": "boolean"
+        },
+        "money_transaction_count": {
+          "type": "integer"
+        },
+        "money_transaction_rrule": {
+          "description": "referrence: https://icalendar.org/rrule-tool.html\n",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "owner_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "product_source_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "ship_from_address_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "ship_to_address_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "shipping_service_select_strategy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/baShippingServiceSelectStrategyItem"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/blStatus"
+        },
+        "survey_info": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/baSurveyInfo"
+          }
+        },
+        "try_on": {
+          "$ref": "#/definitions/csTryOnCode"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "user": {
+          "$ref": "#/definitions/baUser"
+        },
+        "website_url": {
+          "type": "string"
+        }
+      }
+    },
+    "baShopShort": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "baSurveyInfo": {
+      "type": "object",
+      "properties": {
+        "answer": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "question": {
+          "type": "string"
+        }
+      }
+    },
+    "baSwitchAccountRequest": {
+      "type": "object",
+      "required": [
+        "account_id"
+      ],
+      "properties": {
+        "account_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "regenerate_tokens": {
+          "description": "This field should only be used after creating new accounts. If it is set,\naccount_id can be left empty.\n",
+          "type": "boolean"
+        }
+      }
+    },
+    "baUpdateAccountUserPermissionRequest": {
+      "type": "object",
+      "properties": {
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "user_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "baUpdateAddressRequest": {
+      "type": "object",
+      "required": [
+        "province",
+        "district",
+        "ward"
+      ],
+      "properties": {
+        "address1": {
+          "type": "string"
+        },
+        "address2": {
+          "type": "string"
+        },
+        "coordinates": {
+          "$ref": "#/definitions/baCoordinates"
+        },
+        "country": {
+          "type": "string"
+        },
+        "district": {
+          "type": "string"
+        },
+        "district_code": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "notes": {
+          "$ref": "#/definitions/baAddressNote"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string"
+        },
+        "province": {
+          "type": "string"
+        },
+        "province_code": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/adAddressType"
+        },
+        "ward": {
+          "type": "string"
+        },
+        "ward_code": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
+        }
+      }
+    },
+    "baUpdateNotifyTopicRequest": {
+      "type": "object",
+      "properties": {
+        "topic": {
+          "type": "string"
+        }
+      }
+    },
+    "baUpdatePermissionItem": {
+      "type": "object",
+      "properties": {
+        "grants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "key": {
+          "type": "string"
+        },
+        "replace_all": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "revoke_all": {
+          "type": "boolean"
+        },
+        "revokes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "baUpdatePermissionRequest": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/baUpdatePermissionItem"
+          }
+        }
+      }
+    },
+    "baUpdatePermissionResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "baUpdateReferenceSaleRequest": {
+      "type": "object",
+      "required": [
+        "phone"
+      ],
+      "properties": {
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "baUpdateReferenceUserRequest": {
+      "type": "object",
+      "required": [
+        "phone"
+      ],
+      "properties": {
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "baUpdateRelationshipRequest": {
+      "type": "object",
+      "properties": {
+        "full_name": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string"
+        },
+        "short_name": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "baUpdateUserEmailRequest": {
+      "type": "object",
+      "properties": {
+        "authentication_method": {
+          "$ref": "#/definitions/jiAuthenticationMethod"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_code": {
+          "type": "string"
+        },
+        "second_code": {
+          "type": "string"
+        }
+      }
+    },
+    "baUpdateUserEmailResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "baUpdateUserPhoneRequest": {
+      "type": "object",
+      "properties": {
+        "authentication_method": {
+          "$ref": "#/definitions/jiAuthenticationMethod"
+        },
+        "first_code": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "second_code": {
+          "type": "string"
+        }
+      }
+    },
+    "baUpdateUserPhoneResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "baUpgradeAccessTokenRequest": {
+      "type": "object",
+      "required": [
+        "stoken"
+      ],
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "stoken": {
+          "type": "string"
+        }
+      }
+    },
+    "baUser": {
+      "description": "Represents a user in eTop system. The user may or may not have associated accounts.\n",
+      "type": "object",
+      "required": [
+        "id",
+        "full_name",
+        "short_name",
+        "phone",
+        "email",
+        "created_at",
+        "updated_at"
+      ],
+      "properties": {
+        "block_reason": {
+          "type": "string"
+        },
+        "blocked_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "email": {
+          "type": "string"
+        },
+        "email_verification_sent_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "email_verified_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "is_blocked": {
+          "type": "boolean"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "phone_verification_sent_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "phone_verified_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ref_aff": {
+          "type": "string"
+        },
+        "ref_sale": {
+          "type": "string"
+        },
+        "short_name": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/djUserSource"
+        },
+        "total_shop": {
+          "type": "integer"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "baUserAccountInfo": {
+      "description": "Presents user information inside an account\n",
+      "type": "object",
+      "required": [
+        "user_id",
+        "user_full_name",
+        "user_short_name",
+        "account_id",
+        "account_name",
+        "account_type",
+        "permission"
+      ],
+      "properties": {
+        "account_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "account_name": {
+          "type": "string"
+        },
+        "account_type": {
+          "$ref": "#/definitions/jjAccountType"
+        },
+        "disable_reason": {
+          "type": "string"
+        },
+        "disabled_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "disabled_by": {
+          "type": "string",
+          "format": "int64"
+        },
+        "invitation_accepted_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "invitation_rejected_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "invitation_sent_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "invitation_sent_by": {
+          "type": "string",
+          "format": "int64"
+        },
+        "permission": {
+          "$ref": "#/definitions/baPermission"
+        },
+        "position": {
+          "type": "string"
+        },
+        "response_status": {
+          "$ref": "#/definitions/blStatus"
+        },
+        "status": {
+          "$ref": "#/definitions/blStatus"
+        },
+        "user_full_name": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "user_short_name": {
+          "type": "string"
+        }
+      }
+    },
+    "baUserRelationshipLeaveAccountRequest": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "baVerifyEmailUsingOTPRequest": {
+      "type": "object",
+      "required": [
+        "verification_token"
+      ],
+      "properties": {
+        "verification_token": {
+          "type": "string"
+        }
+      }
+    },
+    "baVerifyEmailUsingTokenRequest": {
+      "type": "object",
+      "required": [
+        "verification_token"
+      ],
+      "properties": {
+        "verification_token": {
+          "type": "string"
+        }
+      }
+    },
+    "baVerifyPhoneResetPasswordUsingTokenRequest": {
+      "type": "object",
+      "required": [
+        "verification_token"
+      ],
+      "properties": {
+        "verification_token": {
+          "type": "string"
+        }
+      }
+    },
+    "baVerifyPhoneResetPasswordUsingTokenResponse": {
+      "type": "object",
+      "properties": {
+        "reset_password_token": {
+          "type": "string"
+        }
+      }
+    },
+    "baVerifyPhoneUsingTokenRequest": {
+      "type": "object",
+      "required": [
+        "verification_token"
+      ],
+      "properties": {
+        "verification_token": {
+          "type": "string"
+        }
+      }
+    },
+    "baWard": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "district_code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "baWebphoneLoginRequest": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "baWebphoneRequestLoginRequest": {
+      "type": "object",
+      "properties": {
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "baWebphoneRequestLoginResponse": {
+      "type": "object",
+      "properties": {
+        "secret_key": {
+          "type": "string"
+        }
+      }
+    },
+    "blStatus": {
+      "type": "string",
+      "enum": [
+        "Z",
+        "P",
+        "N"
+      ]
+    },
+    "csTryOnCode": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "none",
+        "open",
+        "try"
+      ]
+    },
+    "djUserSource": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "psx",
+        "etop",
+        "topship",
+        "ts_app_android",
+        "ts_app_ios",
+        "ts_app_web",
+        "partner",
+        "etop_app_ios",
+        "etop_app_android"
+      ]
+    },
+    "jiAuthenticationMethod": {
+      "type": "string",
+      "enum": [
+        "email",
+        "phone"
+      ]
+    },
+    "jjAccountType": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "partner",
+        "shop",
+        "affiliate",
+        "carrier",
+        "etop"
+      ]
+    },
+    "ktEmpty": {
+      "type": "object"
+    },
+    "ktFilter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Comma separated properties: \"name,s_name\"\n",
+          "type": "string"
+        },
+        "op": {
+          "description": "Can be = ≠ (!=) \u003c ≤ (\u003c=) \u003e ≥ (\u003e=) ⊃ (c) ∈ (in) ∩ (n)\n\n- Text or set: ⊃ ∩\n- Exactly: = ≠ ∈\n- Numeric: = ≠ ∈ \u003c ≤ \u003e ≥\n- Array: = ≠ (only with value is {})\n",
+          "type": "string"
+        },
+        "value": {
+          "description": "Must always be string\n",
+          "type": "string"
+        }
+      }
+    },
+    "ktIDRequest": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ktMessageResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "ktPageInfo": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer"
+        },
+        "sort": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "total": {
+          "type": "integer"
+        }
+      }
+    },
+    "ktPaging": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "sort": {
+          "type": "string"
+        }
+      }
+    },
+    "ktUpdatedResponse": {
+      "type": "object",
+      "properties": {
+        "updated": {
+          "type": "integer"
+        }
+      }
+    },
+    "ktVersionInfoResponse": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "service": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "pjGHNNoteCode": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "CHOTHUHANG",
+        "CHOXEMHANGKHONGTHU",
+        "KHONGCHOXEMHANG"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "AccountRelationship"
+    },
+    {
+      "name": "Address"
+    },
+    {
+      "name": "Bank"
+    },
+    {
+      "name": "Location"
+    },
+    {
+      "name": "Misc"
+    },
+    {
+      "name": "User"
+    },
+    {
+      "name": "UserRelationship"
+    }
+  ]
+}
