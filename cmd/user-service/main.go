@@ -1,44 +1,40 @@
 package main
 
 import (
+	"context"
 	"fmt"
-	"log"
 	"math/rand"
+	"social-network/utils/kafka"
 
-	kingpin "github.com/alecthomas/kingpin/v2"
+	log "social-network/utils/log"
 
 	"github.com/Shopify/sarama"
 )
 
-var (
-	brokerList = kingpin.Flag("brokerList", "List of brokers to connect").Default("localhost:9092").Strings()
-	topic      = kingpin.Flag("topic", "Topic name").Default("important").String()
-	maxRetry   = kingpin.Flag("maxRetry", "Retry limit").Default("5").Int()
-)
+var l = log.New()
 
 func main() {
-	kingpin.Parse()
 	config := sarama.NewConfig()
 	config.Producer.RequiredAcks = sarama.WaitForAll
-	config.Producer.Retry.Max = *maxRetry
+	config.Producer.Retry.Max = 5
 	config.Producer.Return.Successes = true
 
-	producer, err := sarama.NewSyncProducer(*brokerList, config)
+	ctx := context.Background()
+
+	syncProducer, err := sarama.NewSyncProducer([]string{"localhost:9092"}, config)
 	if err != nil {
-		log.Panic(err)
+		l.Panic(err)
 	}
 	defer func() {
-		if err := producer.Close(); err != nil {
-			log.Panic(err)
+		if err := syncProducer.Close(); err != nil {
+			l.Panic(err)
 		}
 	}()
-	msg := &sarama.ProducerMessage{
-		Topic: *topic,
-		Value: sarama.StringEncoder(fmt.Sprintf("random value: %s", rand.Int31())),
+
+	producer := kafka.NewKafkaProducer(syncProducer)
+	for i := 0; i < 100; i++ {
+		if err := producer.SendMessage(ctx, "event", []byte(fmt.Sprintf("abc %d", rand.Int31()))); err != nil {
+			l.Errorf(err.Error())
+		}
 	}
-	partition, offset, err := producer.SendMessage(msg)
-	if err != nil {
-		log.Panic(err)
-	}
-	log.Printf("Message is stored in topic(%s)/partition(%d)/offset(%d)\n", *topic, partition, offset)
 }
