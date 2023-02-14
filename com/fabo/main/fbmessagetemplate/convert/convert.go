@@ -1,4 +1,0 @@
-package convert
-
-// +gen:convert: o.o/backend/com/fabo/main/fbmessagetemplate/model -> o.o/api/fabo/fbmessagetemplate
-// +gen:convert: o.o/api/fabo/fbmessagetemplate

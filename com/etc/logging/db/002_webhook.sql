@@ -1,1 +1,0 @@
-ALTER TABLE shipping_provider_webhook ADD COLUMN external_shipping_sub_state TEXT;

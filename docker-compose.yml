@@ -1,21 +1,21 @@
 version: "3.5"
 services:
   redis:
-    container_name: etop_redis
+    container_name: redis
     image: redis:alpine
     ports:
       - 6379:6379
     volumes:
-      - etop_redis_data:/data
+      - redis_data:/data
 
   postgres:
-    container_name: etop_postgres
+    container_name: postgres
     image: postgres:12
     ports:
       - 5432:5432
     shm_size: 4GB
     volumes:
-      - etop_postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
       - $PROJECT_DIR/backend/db:/db
     environment:
       - POSTGRES_USER=postgres
@@ -24,7 +24,7 @@ services:
       - POSTGRES_DATA=/var/lib/postgresql/data/pgdata
 
   zookeeper:
-    container_name: etop_zookeeper
+    container_name: zookeeper
     image: confluentinc/cp-zookeeper
     ports:
       - "2181:2181"
@@ -32,7 +32,7 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
 
   kafka:
-    container_name: etop_kafka
+    container_name: kafka
     image: confluentinc/cp-kafka
     ports:
       - "9092:9092"
@@ -44,7 +44,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
 volumes:
-  etop_redis_data:
+  redis_data:
     external: false
-  etop_postgres_data:
+  postgres_data:
     external: false

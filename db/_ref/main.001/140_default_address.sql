@@ -1,1 +1,0 @@
-CREATE UNIQUE INDEX shop_with_type_is_default_idx ON "address" (account_id, type, is_default) WHERE is_default = true;

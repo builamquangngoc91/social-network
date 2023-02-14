@@ -1,3 +1,0 @@
-ALTER TABLE credit ADD COLUMN deleted_at TIMESTAMPTZ;
-
-ALTER TABLE history.credit ADD COLUMN deleted_at TIMESTAMPTZ;
