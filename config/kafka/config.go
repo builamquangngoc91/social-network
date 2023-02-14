@@ -1,22 +1,19 @@
 package kafka
 
-type TopicConfig struct {
-	Name      string
-	Partition int64
-}
+import "social-network/utils/kafka"
 
-func GetKafkaTopicConfigs() []*TopicConfig {
-	return []*TopicConfig{
+func GetTopicDefs() []*kafka.TopicDef {
+	return []*kafka.TopicDef{
 		{
-			Name:      "event",
+			Name: "event",
 			Partition: 16,
 		},
 		{
-			Name:      "feed",
+			Name: "feed",
 			Partition: 16,
 		},
 		{
-			Name:      "comment",
+			Name: "comment",
 			Partition: 16,
 		},
 	}
