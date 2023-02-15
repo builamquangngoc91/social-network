@@ -1,0 +1,133 @@
+package repositories
+
+import (
+	"context"
+	"database/sql"
+	"fmt"
+	"strings"
+
+	"social-network/internal/entities"
+	"social-network/utils/golibs/database"
+)
+
+type FeedRepository struct {
+	*sql.DB
+}
+
+func NewFeedRepository(db *sql.DB) *FeedRepository {
+	return &FeedRepository{
+		db,
+	}
+}
+
+func (r *FeedRepository) Create(ctx context.Context, u *entities.Feed) error {
+	fields, values := u.FieldMap()
+	placeHolders := database.GeneratePlaceholders(len(fields))
+
+	stmt := fmt.Sprintf(`INSERT INTO %s(%s) VALUES (%s)`, u.TableName(), strings.Join(fields, ","), placeHolders)
+	result, err := r.DB.ExecContext(ctx, stmt, values...)
+	if err != nil {
+		return fmt.Errorf("r.DB.ExecContext: %w", err)
+	}
+
+	rowAffected, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("result.RowsAffected: %w", err)
+	}
+
+	if rowAffected != 1 {
+		return fmt.Errorf("can't insert feed")
+	}
+
+	return err
+}
+
+func (r *FeedRepository) Update(ctx context.Context, u *entities.Feed) error {
+	stmt := fmt.Sprintf(`UPDATE %s SET message = ?, image_urls = ?, updated_at = NOW() WHERE feed_id = ?`, u.TableName())
+	result, err := r.DB.ExecContext(ctx, stmt, &u.Message, &u.ImageUrls, &u.FeedID)
+	if err != nil {
+		return fmt.Errorf("r.DB.ExecContext: %w", err)
+	}
+
+	rowAffected, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("result.RowsAffected: %w", err)
+	}
+
+	if rowAffected != 1 {
+		return fmt.Errorf("can't update feed")
+	}
+
+	return err
+}
+
+// FindByFeedID find feed by feedID
+func (r *AccountRepository) FindByFeedID(ctx context.Context, feedID string) (*entities.Feed, error) {
+	user := &entities.Feed{}
+	fields, values := user.FieldMap()
+
+	stmt := fmt.Sprintf(`SELECT %s FROM %s WHERE feed_id = $1`, strings.Join(fields, ","), user.TableName())
+	row := r.QueryRowContext(ctx, stmt, feedID)
+
+	if err := row.Scan(values...); err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}
+
+type ListFeedsArgs struct {
+	AccountID string
+}
+
+// List find feeds
+func (r *FeedRepository) List(ctx context.Context, args *ListFeedsArgs) (fs entities.Feeds, _ error) {
+	feed := &entities.Feed{}
+	fields, _ := feed.FieldMap()
+
+	stmt := fmt.Sprintf(`SELECT %s 
+	FROM %s 
+	WHERE account_id = $1::TEXT`, strings.Join(fields, ","), feed.TableName())
+	rows, err := r.QueryContext(ctx, stmt, args.AccountID)
+	if err != nil {
+		return nil, fmt.Errorf("r.QueryContext: %w", err)
+	}
+
+	defer rows.Close()
+	for rows.Next() {
+		f := &entities.Feed{}
+		_, values := f.FieldMap()
+		err := rows.Scan(values...)
+		if err != nil {
+			return nil, fmt.Errorf("rows.Scan: %w", err)
+		}
+		fs = append(fs, f)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("rows.Err: %w", err)
+	}
+
+	return fs, nil
+}
+
+func (r *FeedRepository) Delete(ctx context.Context, feedID string) error {
+	feed := &entities.Feed{}
+
+	stmt := fmt.Sprintf(`UPDATE %s SET deleted_at = NOW() WHERE feed_id = ?`, feed.TableName())
+	result, err := r.DB.ExecContext(ctx, stmt, &feed.FeedID)
+	if err != nil {
+		return fmt.Errorf("r.DB.ExecContext: %w", err)
+	}
+
+	rowAffected, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("result.RowsAffected: %w", err)
+	}
+
+	if rowAffected != 1 {
+		return fmt.Errorf("can't delete feed")
+	}
+
+	return err
+}

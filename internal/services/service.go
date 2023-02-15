@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"reflect"
 
+	"social-network/utils/kafka"
 	"social-network/utils/xerror"
 
 	"github.com/dgrijalva/jwt-go"
@@ -35,20 +36,20 @@ type Decl struct {
 
 type RemiService struct {
 	jwtKey         string
+	kafkaProducer  *kafka.KafkaProducer
 	accountService *AccountService
 	// userService  *UserService
 	// movieService *MovieService
 	acl map[string]map[string]Decl
 }
 
-func NewServices(db *sql.DB, JWTKey string) *RemiService {
-	accountService := NewAccountService(db, JWTKey)
-	// movieService := NewMovieService(db, url)
+func NewServices(db *sql.DB, JWTKey string, kafkaProducer *kafka.KafkaProducer) *RemiService {
+	accountService := NewAccountService(db, JWTKey, kafkaProducer)
 
 	return &RemiService{
-		jwtKey: JWTKey,
-		// userService:  userService,
-		// movieService: movieService,
+		jwtKey:         JWTKey,
+		kafkaProducer:  kafkaProducer,
+		accountService: accountService,
 		acl: map[string]map[string]Decl{
 			"/api/v1/register": {
 				http.MethodPost: Decl{
@@ -64,13 +65,27 @@ func NewServices(db *sql.DB, JWTKey string) *RemiService {
 					ResponseType: JSON,
 				},
 			},
-			// "/api/v1/createMovie": {
-			// 	http.MethodPost: Decl{
-			// 		HandlerFunc:  movieService.Create,
-			// 		Auth:         User,
-			// 		ResponseType: JSON,
-			// 	},
-			// },
+			"/api/v1/followAccount": {
+				http.MethodPost: Decl{
+					HandlerFunc:  accountService.FollowAccount,
+					Auth:         User,
+					ResponseType: JSON,
+				},
+			},
+			"/api/v1/unfollowAccount": {
+				http.MethodPost: Decl{
+					HandlerFunc:  accountService.UnFollowAccount,
+					Auth:         User,
+					ResponseType: JSON,
+				},
+			},
+			"/api/v1/createFeed": {
+				http.MethodPost: Decl{
+					HandlerFunc:  feedService.CreateFeed,
+					Auth:         User,
+					ResponseType: JSON,
+				},
+			},
 			// "/api/v1/getMovieByUser": {
 			// 	http.MethodPost: Decl{
 			// 		HandlerFunc:  movieService.GetMovieByUser,
@@ -207,14 +222,14 @@ func (s *RemiService) validToken(req *http.Request) (*http.Request, bool) {
 		return req, false
 	}
 
-	req = req.WithContext(context.WithValue(req.Context(), userAuthKey(0), id))
+	req = req.WithContext(context.WithValue(req.Context(), accountAuthKey(0), id))
 	return req, true
 }
 
-type userAuthKey int8
+type accountAuthKey int8
 
-func userIDFromCtx(ctx context.Context) (string, bool) {
-	v := ctx.Value(userAuthKey(0))
+func accountIDFromCtx(ctx context.Context) (string, bool) {
+	v := ctx.Value(accountAuthKey(0))
 	id, ok := v.(string)
 	return id, ok
 }

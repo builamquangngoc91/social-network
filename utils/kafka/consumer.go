@@ -23,7 +23,7 @@ var l = log.New()
 
 func (c *Consumer) StartConsuming(ctx context.Context, topics []*TopicDef, handlers map[string]Handler) error {
 	for _, topic := range topics {
-		handler := handlers[topic.Name]
+		handler := handlers[string(topic.Name)]
 		if handler == nil {
 			l.Infof("No handler for topic: %s", topic.Name)
 			continue
@@ -60,7 +60,7 @@ func (c *Consumer) consumeAndHandleTopic(ctx context.Context, topic *TopicDef, h
 				}
 			}()
 
-		}(topic.Name, partition)
+		}(string(topic.Name), partition)
 	}
 
 	wg.Wait()

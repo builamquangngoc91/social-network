@@ -5,16 +5,22 @@ import "social-network/utils/kafka"
 func GetTopicDefs() []*kafka.TopicDef {
 	return []*kafka.TopicDef{
 		{
-			Name: "event",
+			Name:      EventTopic,
 			Partition: 16,
 		},
 		{
-			Name: "feed",
+			Name:      FeedTopic,
 			Partition: 16,
 		},
 		{
-			Name: "comment",
+			Name:      CommentTopic,
 			Partition: 16,
 		},
 	}
 }
+
+const (
+	EventTopic   kafka.TopicName = "event"
+	FeedTopic    kafka.TopicName = "feed"
+	CommentTopic kafka.TopicName = "comment"
+)

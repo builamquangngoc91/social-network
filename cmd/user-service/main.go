@@ -4,34 +4,34 @@ import (
 	"database/sql"
 	"net/http"
 	"social-network/utils/cmsql"
+	"social-network/utils/kafka"
 	log "social-network/utils/log"
 
 	"social-network/internal/services"
 
+	"github.com/Shopify/sarama"
 	_ "github.com/lib/pq"
 )
 
 var l = log.New()
 
 func main() {
-	// config := sarama.NewConfig()
-	// config.Producer.RequiredAcks = sarama.WaitForAll
-	// config.Producer.Retry.Max = 5
-	// config.Producer.Return.Successes = true
+	config := sarama.NewConfig()
+	config.Producer.RequiredAcks = sarama.WaitForAll
+	config.Producer.Retry.Max = 5
+	config.Producer.Return.Successes = true
 
-	// ctx := context.Background()
+	syncProducer, err := sarama.NewSyncProducer([]string{"localhost:9092"}, config)
+	if err != nil {
+		l.Panic(err)
+	}
+	defer func() {
+		if err := syncProducer.Close(); err != nil {
+			l.Panic(err)
+		}
+	}()
 
-	// syncProducer, err := sarama.NewSyncProducer([]string{"localhost:9092"}, config)
-	// if err != nil {
-	// 	l.Panic(err)
-	// }
-	// defer func() {
-	// 	if err := syncProducer.Close(); err != nil {
-	// 		l.Panic(err)
-	// 	}
-	// }()
-
-	// producer := kafka.NewKafkaProducer(syncProducer)
+	kafkaProducer := kafka.NewKafkaProducer(syncProducer)
 	// for i := 0; i < 100; i++ {
 	// 	if err := producer.SendMessage(ctx, "event", []byte(fmt.Sprintf("abc %d", rand.Int31()))); err != nil {
 	// 		l.Errorf(err.Error())
@@ -56,7 +56,7 @@ func main() {
 		l.Panicf("error when ping: %v", err)
 	}
 
-	services := services.NewServices(db, "secret")
+	services := services.NewServices(db, "secret", kafkaProducer)
 
 	l.Printf("HTTP server listening at %v", "8080")
 

@@ -64,7 +64,7 @@ func (r *AccountRepository) FindByID(ctx context.Context, id string) (*entities.
 	user := &entities.Account{}
 	fields, values := user.FieldMap()
 
-	stmt := fmt.Sprintf(`SELECT %s FROM %s WHERE id = $1`, strings.Join(fields, ","), user.TableName())
+	stmt := fmt.Sprintf(`SELECT %s FROM %s WHERE account_id = $1`, strings.Join(fields, ","), user.TableName())
 	row := r.QueryRowContext(ctx, stmt, id)
 
 	if err := row.Scan(values...); err != nil {

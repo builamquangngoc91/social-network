@@ -19,25 +19,23 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-var _ up.AccountService = &AccountService{}
+var _ up.FeedService = &FeedService{}
 
-type AccountService struct {
-	accountRepo   *repositories.AccountRepository
-	followerRepo  *repositories.FollowerRepository
-	jwtKey        string
+type FeedService struct {
+	feedRepo      *repositories.FeedRepository
+	commentRepo   *repositories.CommentRepository
 	kafkaProducer *kafka.KafkaProducer
 }
 
-func NewAccountService(db *sql.DB, jwtKey string, kafkaProducer *kafka.KafkaProducer) *AccountService {
-	return &AccountService{
-		accountRepo:   repositories.NewAccountRepository(db),
-		followerRepo:  repositories.NewFollowerRepository(db),
-		jwtKey:        jwtKey,
+func NewFeedService(db *sql.DB, kafkaProducer *kafka.KafkaProducer) *FeedService {
+	return &FeedService{
+		feedRepo:      repositories.NewFeedRepository(db),
+		commentRepo:   repositories.NewCommentRepository(db),
 		kafkaProducer: kafkaProducer,
 	}
 }
 
-func (s *AccountService) Register(ctx context.Context, req *up.RegisterRequest) (*up.RegisterResponse, error) {
+func (s *FeedService) Register(ctx context.Context, req *up.RegisterRequest) (*up.RegisterResponse, error) {
 	if err := req.Validate(); err != nil {
 		return nil, xerror.Error(xerror.InvalidArgument, err)
 	}

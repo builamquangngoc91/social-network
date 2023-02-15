@@ -9,3 +9,6 @@ CREATE TABLE IF NOT EXISTS follower (
     FOREIGN KEY (account_id) REFERENCES account(account_id),
     FOREIGN KEY (follower_id) REFERENCES account(account_id)
 );
+
+ALTER TABLE follower
+ADD CONSTRAINT follower_un UNIQUE(account_id, follower_id);
