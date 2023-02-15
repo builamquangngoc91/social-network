@@ -55,11 +55,11 @@ type LoginResponse struct {
 	Token    string `json:"token"`
 }
 
-type FollowAccountRequest struct {
+type FollowRequest struct {
 	AccountID string `json:"account_id"`
 }
 
-func (r *FollowAccountRequest) Validate() error {
+func (r *FollowRequest) Validate() error {
 	if strings.TrimSpace(r.AccountID) == "" {
 		return xerror.ErrorM(xerror.InvalidArgument, nil, "account_id can't be null")
 	}
@@ -67,13 +67,13 @@ func (r *FollowAccountRequest) Validate() error {
 	return nil
 }
 
-type FollowAccountResponse struct{}
+type FollowResponse struct{}
 
-type UnFollowAccountRequest struct {
+type UnFollowRequest struct {
 	AccountID string `json:"account_id"`
 }
 
-func (r *UnFollowAccountRequest) Validate() error {
+func (r *UnFollowRequest) Validate() error {
 	if strings.TrimSpace(r.AccountID) == "" {
 		return xerror.ErrorM(xerror.InvalidArgument, nil, "account_id can't be null")
 	}
@@ -81,4 +81,4 @@ func (r *UnFollowAccountRequest) Validate() error {
 	return nil
 }
 
-type UnFollowAccountResponse struct{}
+type UnFollowResponse struct{}

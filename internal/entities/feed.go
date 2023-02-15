@@ -1,12 +1,14 @@
 package entities
 
-import "time"
+import (
+	"time"
+)
 
 type Feed struct {
 	FeedID    string
 	AccountID string
 	Message   string
-	ImageUrls []string
+	ImageUrl  string
 	CreatedAt *time.Time
 	UpdatedAt *time.Time
 	DeletedAt *time.Time
@@ -19,7 +21,7 @@ func (e *Feed) FieldMap() (fields []string, values []interface{}) {
 			"feed_id",
 			"account_id",
 			"message",
-			"image_urls",
+			"image_url",
 			"created_at",
 			"updated_at",
 			"deleted_at",
@@ -27,7 +29,7 @@ func (e *Feed) FieldMap() (fields []string, values []interface{}) {
 			&e.FeedID,
 			&e.AccountID,
 			&e.Message,
-			&e.ImageUrls,
+			&e.ImageUrl,
 			&e.CreatedAt,
 			&e.UpdatedAt,
 			&e.DeletedAt,

@@ -117,7 +117,7 @@ func (s *AccountService) createToken(id, username string) (string, error) {
 	return token, nil
 }
 
-func (s *AccountService) FollowAccount(ctx context.Context, req *up.FollowAccountRequest) (*up.FollowAccountResponse, error) {
+func (s *AccountService) Follow(ctx context.Context, req *up.FollowRequest) (*up.FollowResponse, error) {
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
@@ -153,10 +153,10 @@ func (s *AccountService) FollowAccount(ctx context.Context, req *up.FollowAccoun
 		return nil, xerror.Error(xerror.Internal, fmt.Errorf("s.kafkaProducer.SendMessage: %w", err))
 	}
 
-	return &up.FollowAccountResponse{}, nil
+	return &up.FollowResponse{}, nil
 }
 
-func (s *AccountService) UnFollowAccount(ctx context.Context, req *up.UnFollowAccountRequest) (*up.UnFollowAccountResponse, error) {
+func (s *AccountService) UnFollow(ctx context.Context, req *up.UnFollowRequest) (*up.UnFollowResponse, error) {
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
@@ -182,5 +182,5 @@ func (s *AccountService) UnFollowAccount(ctx context.Context, req *up.UnFollowAc
 		return nil, xerror.Error(xerror.Internal, fmt.Errorf("s.followerRepo.Upsert: %w", err))
 	}
 
-	return &up.UnFollowAccountResponse{}, nil
+	return &up.UnFollowResponse{}, nil
 }

@@ -11,14 +11,14 @@ type Feed struct {
 	FeedID    string    `json:"feed_id"`
 	AccountID string    `json:"account_id"`
 	Message   string    `json:"message"`
-	ImageUrls []string  `json:"image_urls"`
+	ImageUrl  string    `json:"image_url"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 type CreateFeedRequest struct {
-	Message   string   `json:"message"`
-	ImageUrls []string `json:"image_urls"`
+	Message  string `json:"message"`
+	ImageUrl string `json:"image_url"`
 }
 
 func (r *CreateFeedRequest) Validate() error {
@@ -29,12 +29,14 @@ func (r *CreateFeedRequest) Validate() error {
 	return nil
 }
 
-type CreateFeedResponse struct{}
+type CreateFeedResponse struct {
+	FeedID string `json:"feed_id"`
+}
 
 type UpdateFeedRequest struct {
-	FeedID    string `json:"feed_id"`
-	Message   string `json:"message"`
-	ImageUrls string `json:"image_urls"`
+	FeedID   string `json:"feed_id"`
+	Message  string `json:"message"`
+	ImageUrl string `json:"image_url"`
 }
 
 type UpdateFeedResponse struct{}
@@ -80,7 +82,9 @@ type GetFeedResponse struct {
 	*Feed
 }
 
-type ListFeedsRequest struct{}
+type ListFeedsRequest struct {
+	OnlyCurrentAccount bool `json:"only_current_account"`
+}
 
 type ListFeedsResponse struct {
 	Feeds []*Feed `json:"feeds"`

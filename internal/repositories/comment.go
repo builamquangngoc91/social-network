@@ -43,7 +43,7 @@ func (r *CommentRepository) Create(ctx context.Context, u *entities.Comment) err
 }
 
 func (r *CommentRepository) Update(ctx context.Context, u *entities.Comment) error {
-	stmt := fmt.Sprintf(`UPDATE %s SET message = ?, image_url = ?, updated_at = NOW() WHERE comment_id = ?`, u.TableName())
+	stmt := fmt.Sprintf(`UPDATE %s SET message = $1, image_url = $2, updated_at = NOW() WHERE comment_id = $3`, u.TableName())
 	result, err := r.DB.ExecContext(ctx, stmt, &u.Message, &u.ImageUrl, &u.CommentID)
 	if err != nil {
 		return fmt.Errorf("r.DB.ExecContext: %w", err)
@@ -111,11 +111,11 @@ func (r *CommentRepository) List(ctx context.Context, args *ListCommentsArgs) (c
 	return cs, nil
 }
 
-func (r *CommentRepository) Delete(ctx context.Context, commentID string) error {
+func (r *CommentRepository) Delete(ctx context.Context, commentID, accountID string) error {
 	comment := &entities.Comment{}
 
-	stmt := fmt.Sprintf(`UPDATE %s SET deleted_at = NOW() WHERE comment_id = ?`, comment.TableName())
-	result, err := r.DB.ExecContext(ctx, stmt, &comment.CommentID)
+	stmt := fmt.Sprintf(`UPDATE %s SET deleted_at = NOW() WHERE comment_id = $1 AND account_id = $2`, comment.TableName())
+	result, err := r.DB.ExecContext(ctx, stmt, &commentID, &accountID)
 	if err != nil {
 		return fmt.Errorf("r.DB.ExecContext: %w", err)
 	}

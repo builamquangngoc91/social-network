@@ -11,174 +11,148 @@ import (
 	"social-network/internal/handlers"
 	"social-network/internal/repositories"
 	"social-network/up"
-	"social-network/utils/crypto"
 	"social-network/utils/golibs/idutil"
 	"social-network/utils/kafka"
 	"social-network/utils/xerror"
-
-	"github.com/dgrijalva/jwt-go"
 )
 
 var _ up.FeedService = &FeedService{}
 
 type FeedService struct {
 	feedRepo      *repositories.FeedRepository
-	commentRepo   *repositories.CommentRepository
 	kafkaProducer *kafka.KafkaProducer
 }
 
 func NewFeedService(db *sql.DB, kafkaProducer *kafka.KafkaProducer) *FeedService {
 	return &FeedService{
 		feedRepo:      repositories.NewFeedRepository(db),
-		commentRepo:   repositories.NewCommentRepository(db),
 		kafkaProducer: kafkaProducer,
 	}
 }
 
-func (s *FeedService) Register(ctx context.Context, req *up.RegisterRequest) (*up.RegisterResponse, error) {
-	if err := req.Validate(); err != nil {
-		return nil, xerror.Error(xerror.InvalidArgument, err)
-	}
-
-	account, err := s.accountRepo.FindByUsername(ctx, req.Username)
-	if err != nil && err != sql.ErrNoRows {
-		return nil, xerror.Error(xerror.Internal, err)
-	}
-
-	if account != nil {
-		return nil, xerror.Error(xerror.InvalidArgument, fmt.Errorf("account exists with the given username"))
-	}
-
-	password, err := crypto.HashPassword(req.Password)
-	if err != nil {
-		return nil, xerror.Error(xerror.Internal, fmt.Errorf("crypto.HashPassword: %w", err))
-	}
-
-	now := time.Now()
-	err = s.accountRepo.Create(ctx, &entities.Account{
-		AccountID: idutil.NewID(),
-		Username:  req.Username,
-		Password:  password,
-		Fullname:  req.Fullname,
-		Email:     req.Email,
-		CreatedAt: &now,
-		UpdatedAt: &now,
-	})
-	if err != nil {
-		return nil, xerror.Error(xerror.Internal, err)
-	}
-
-	return &up.RegisterResponse{}, nil
-}
-
-func (s *AccountService) Login(ctx context.Context, req *up.LoginRequest) (*up.LoginResponse, error) {
-	if err := req.Validate(); err != nil {
-		return nil, err
-	}
-
-	account, err := s.accountRepo.FindByUsername(ctx, req.Username)
-	if err != nil {
-		if err != sql.ErrNoRows {
-			return nil, xerror.Error(xerror.Internal, fmt.Errorf("s.accountRepo.FindByUsername: %w", err))
-		}
-		return nil, xerror.Error(xerror.UnAuthorized, fmt.Errorf("incorrect username/pwd"))
-	}
-
-	if account == nil || !crypto.CheckPasswordHash(req.Password, account.Password) {
-		return nil, xerror.Error(xerror.UnAuthorized, fmt.Errorf("incorrect username/pwd"))
-	}
-
-	token, err := s.createToken(account.AccountID, account.Username)
-	if err != nil {
-		return nil, xerror.Error(xerror.Internal, err)
-	}
-
-	return &up.LoginResponse{
-		ID:       account.AccountID,
-		Username: account.Username,
-		Fullname: account.Fullname,
-		Email:    account.Email,
-		Token:    token,
-	}, nil
-}
-
-func (s *AccountService) createToken(id, username string) (string, error) {
-	atClaims := jwt.MapClaims{}
-	atClaims["id"] = id
-	atClaims["username"] = username
-	atClaims["exp"] = time.Now().Add(time.Hour * 2).Unix()
-	at := jwt.NewWithClaims(jwt.SigningMethodHS256, atClaims)
-	token, err := at.SignedString([]byte(s.jwtKey))
-	if err != nil {
-		return "", err
-	}
-	return token, nil
-}
-
-func (s *AccountService) FollowAccount(ctx context.Context, req *up.FollowAccountRequest) (*up.FollowAccountResponse, error) {
+func (s *FeedService) Create(ctx context.Context, req *up.CreateFeedRequest) (*up.CreateFeedResponse, error) {
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
 	currentAccount, _ := accountIDFromCtx(ctx)
-	if _, err := s.accountRepo.FindByID(ctx, req.AccountID); err != nil {
-		if err == sql.ErrNoRows {
-			return nil, xerror.Error(xerror.Internal, fmt.Errorf("account %s not found", req.AccountID))
-		}
-		return nil, xerror.Error(xerror.Internal, fmt.Errorf("s.accountRepo.FindByID: %w", err))
-	}
 
 	now := time.Now()
-	follower := &entities.Follower{
-		ID:           idutil.NewID(),
-		AccountID:    currentAccount,
-		FollowerID:   req.AccountID,
-		FollowedDate: &now,
-		CreatedAt:    &now,
-		UpdatedAt:    &now,
+	feed := &entities.Feed{
+		FeedID:    idutil.NewID(),
+		AccountID: currentAccount,
+		Message:   req.Message,
+		ImageUrl:  req.ImageUrl,
+		CreatedAt: &now,
+		UpdatedAt: &now,
 	}
 
-	if err := s.followerRepo.Upsert(ctx, follower); err != nil {
-		return nil, xerror.Error(xerror.Internal, fmt.Errorf("s.followerRepo.Upsert: %w", err))
+	if err := s.feedRepo.Create(ctx, feed); err != nil {
+		return nil, xerror.Error(xerror.Internal, fmt.Errorf("s.feedRepository.Create: %w", err))
 	}
 
 	// send message to kafka
-	body, err := handlers.NewAccountFollowed(currentAccount, req.AccountID)
+	body, err := handlers.NewFeedCreated(feed)
 	if err != nil {
-		return nil, xerror.Error(xerror.Internal, fmt.Errorf("handlers.NewAccountFollowed: %w", err))
+		return nil, xerror.Error(xerror.Internal, fmt.Errorf("handlers.NewFeedCreated: %w", err))
 	}
 
-	if err := s.kafkaProducer.SendMessage(ctx, string(kafkaConfig.EventTopic), body); err != nil {
+	if err := s.kafkaProducer.SendMessage(ctx, string(kafkaConfig.FeedTopic), body); err != nil {
 		return nil, xerror.Error(xerror.Internal, fmt.Errorf("s.kafkaProducer.SendMessage: %w", err))
 	}
 
-	return &up.FollowAccountResponse{}, nil
+	return &up.CreateFeedResponse{
+		FeedID: feed.FeedID,
+	}, nil
 }
 
-func (s *AccountService) UnFollowAccount(ctx context.Context, req *up.UnFollowAccountRequest) (*up.UnFollowAccountResponse, error) {
+func (s *FeedService) Update(ctx context.Context, req *up.UpdateFeedRequest) (*up.UpdateFeedResponse, error) {
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
 	currentAccount, _ := accountIDFromCtx(ctx)
-	if _, err := s.accountRepo.FindByID(ctx, req.AccountID); err != nil {
-		if err == sql.ErrNoRows {
-			return nil, xerror.Error(xerror.Internal, fmt.Errorf("account %s not found", req.AccountID))
-		}
-		return nil, xerror.Error(xerror.Internal, fmt.Errorf("s.accountRepo.FindByID: %w", err))
-	}
 
 	now := time.Now()
-	follower := &entities.Follower{
-		ID:             idutil.NewID(),
-		AccountID:      currentAccount,
-		FollowerID:     req.AccountID,
-		UnFollowedDate: &now,
-		CreatedAt:      &now,
-		UpdatedAt:      &now,
+	feed := &entities.Feed{
+		FeedID:    req.FeedID,
+		AccountID: currentAccount,
+		Message:   req.Message,
+		ImageUrl:  req.ImageUrl,
+		UpdatedAt: &now,
 	}
 
-	if err := s.followerRepo.Upsert(ctx, follower); err != nil {
-		return nil, xerror.Error(xerror.Internal, fmt.Errorf("s.followerRepo.Upsert: %w", err))
+	if err := s.feedRepo.Update(ctx, feed); err != nil {
+		return nil, xerror.Error(xerror.Internal, fmt.Errorf("s.feedRepository.Update: %w", err))
 	}
 
-	return &up.UnFollowAccountResponse{}, nil
+	return &up.UpdateFeedResponse{}, nil
+}
+
+func (s *FeedService) Get(ctx context.Context, req *up.GetFeedRequest) (*up.GetFeedResponse, error) {
+	if err := req.Validate(); err != nil {
+		return nil, err
+	}
+	currentAccount, _ := accountIDFromCtx(ctx)
+
+	feed, err := s.feedRepo.FindByFeedIDAndAccountID(ctx, req.FeedID, currentAccount)
+	if err != nil {
+		return nil, xerror.Error(xerror.Internal, fmt.Errorf("s.feedRepository.FindByFeedIDAndAccountID: %w", err))
+	}
+
+	return &up.GetFeedResponse{
+		Feed: s.convertFeedEntToFeedUp(feed),
+	}, nil
+}
+
+func (s *FeedService) List(ctx context.Context, req *up.ListFeedsRequest) (*up.ListFeedsResponse, error) {
+	listFeedsArgs := &repositories.ListFeedsArgs{}
+	if req.OnlyCurrentAccount {
+		currentAccount, _ := accountIDFromCtx(ctx)
+
+		listFeedsArgs.AccountID = &currentAccount
+	}
+
+	feeds, err := s.feedRepo.List(ctx, listFeedsArgs)
+	if err != nil {
+		return nil, xerror.Error(xerror.Internal, fmt.Errorf("s.feedRepo.List: %w", err))
+	}
+
+	feedsUp := make([]*up.Feed, 0, len(feeds))
+	for _, feed := range feeds {
+		feedsUp = append(feedsUp, s.convertFeedEntToFeedUp(feed))
+	}
+
+	return &up.ListFeedsResponse{
+		Feeds: feedsUp,
+	}, nil
+}
+
+func (s *FeedService) Delete(ctx context.Context, req *up.DeleteFeedRequest) (*up.DeleteFeedResponse, error) {
+	if err := req.Validate(); err != nil {
+		return nil, err
+	}
+	currentAccount, _ := accountIDFromCtx(ctx)
+
+	err := s.feedRepo.Delete(ctx, req.FeedID, currentAccount)
+	if err != nil {
+		return nil, xerror.Error(xerror.Internal, fmt.Errorf("s.feedRepository.Delete: %w", err))
+	}
+
+	return &up.DeleteFeedResponse{}, nil
+}
+
+func (s *FeedService) convertFeedEntToFeedUp(feedEnt *entities.Feed) *up.Feed {
+	feedUp := &up.Feed{
+		FeedID:    feedEnt.FeedID,
+		AccountID: feedEnt.AccountID,
+		Message:   feedEnt.Message,
+		ImageUrl:  feedEnt.ImageUrl,
+	}
+	if feedEnt.CreatedAt != nil {
+		feedUp.CreatedAt = *feedEnt.CreatedAt
+	}
+	if feedEnt.UpdatedAt != nil {
+		feedUp.UpdatedAt = *feedEnt.UpdatedAt
+	}
+
+	return feedUp
 }

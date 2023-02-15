@@ -34,7 +34,9 @@ func (r *CreateCommentRequest) Validate() error {
 	return nil
 }
 
-type CreateCommentResponse struct{}
+type CreateCommentResponse struct {
+	CommentID string `json:"comment_id"`
+}
 
 type UpdateCommentRequest struct {
 	CommentID string `json:"comment_id"`

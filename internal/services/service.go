@@ -38,18 +38,22 @@ type RemiService struct {
 	jwtKey         string
 	kafkaProducer  *kafka.KafkaProducer
 	accountService *AccountService
-	// userService  *UserService
-	// movieService *MovieService
-	acl map[string]map[string]Decl
+	feedService    *FeedService
+	commentService *CommentService
+	acl            map[string]map[string]Decl
 }
 
 func NewServices(db *sql.DB, JWTKey string, kafkaProducer *kafka.KafkaProducer) *RemiService {
 	accountService := NewAccountService(db, JWTKey, kafkaProducer)
+	feedService := NewFeedService(db, kafkaProducer)
+	commentService := NewCommentService(db)
 
 	return &RemiService{
 		jwtKey:         JWTKey,
 		kafkaProducer:  kafkaProducer,
 		accountService: accountService,
+		feedService:    feedService,
+		commentService: commentService,
 		acl: map[string]map[string]Decl{
 			"/api/v1/register": {
 				http.MethodPost: Decl{
@@ -67,46 +71,81 @@ func NewServices(db *sql.DB, JWTKey string, kafkaProducer *kafka.KafkaProducer) 
 			},
 			"/api/v1/followAccount": {
 				http.MethodPost: Decl{
-					HandlerFunc:  accountService.FollowAccount,
+					HandlerFunc:  accountService.Follow,
 					Auth:         User,
 					ResponseType: JSON,
 				},
 			},
 			"/api/v1/unfollowAccount": {
 				http.MethodPost: Decl{
-					HandlerFunc:  accountService.UnFollowAccount,
+					HandlerFunc:  accountService.UnFollow,
 					Auth:         User,
 					ResponseType: JSON,
 				},
 			},
 			"/api/v1/createFeed": {
 				http.MethodPost: Decl{
-					HandlerFunc:  feedService.CreateFeed,
+					HandlerFunc:  feedService.Create,
 					Auth:         User,
 					ResponseType: JSON,
 				},
 			},
-			// "/api/v1/getMovieByUser": {
-			// 	http.MethodPost: Decl{
-			// 		HandlerFunc:  movieService.GetMovieByUser,
-			// 		Auth:         User,
-			// 		ResponseType: JSON,
-			// 	},
-			// },
-			// "/api/v1/listMoviesByUser": {
-			// 	http.MethodPost: Decl{
-			// 		HandlerFunc:  movieService.ListMoviesByUser,
-			// 		Auth:         User,
-			// 		ResponseType: JSON,
-			// 	},
-			// },
-			// "/api/v1/listMovies": {
-			// 	http.MethodPost: Decl{
-			// 		HandlerFunc:  movieService.ListMovies,
-			// 		Auth:         None,
-			// 		ResponseType: JSON,
-			// 	},
-			// },
+			"/api/v1/updateFeed": {
+				http.MethodPost: Decl{
+					HandlerFunc:  feedService.Update,
+					Auth:         User,
+					ResponseType: JSON,
+				},
+			},
+			"/api/v1/getFeed": {
+				http.MethodPost: Decl{
+					HandlerFunc:  feedService.Get,
+					Auth:         User,
+					ResponseType: JSON,
+				},
+			},
+			"/api/v1/listFeeds": {
+				http.MethodPost: Decl{
+					HandlerFunc:  feedService.List,
+					Auth:         User,
+					ResponseType: JSON,
+				},
+			},
+			"/api/v1/deleteFeed": {
+				http.MethodPost: Decl{
+					HandlerFunc:  feedService.Delete,
+					Auth:         User,
+					ResponseType: JSON,
+				},
+			},
+			"/api/v1/createComment": {
+				http.MethodPost: Decl{
+					HandlerFunc:  commentService.Create,
+					Auth:         User,
+					ResponseType: JSON,
+				},
+			},
+			"/api/v1/updateComment": {
+				http.MethodPost: Decl{
+					HandlerFunc:  commentService.Update,
+					Auth:         User,
+					ResponseType: JSON,
+				},
+			},
+			"/api/v1/listComments": {
+				http.MethodPost: Decl{
+					HandlerFunc:  commentService.List,
+					Auth:         User,
+					ResponseType: JSON,
+				},
+			},
+			"/api/v1/deleteComment": {
+				http.MethodPost: Decl{
+					HandlerFunc:  commentService.Delete,
+					Auth:         User,
+					ResponseType: JSON,
+				},
+			},
 		},
 	}
 }

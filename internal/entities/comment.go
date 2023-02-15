@@ -17,6 +17,7 @@ type Comments []*Comment
 
 func (e *Comment) FieldMap() (fields []string, values []interface{}) {
 	return []string{
+			"comment_id",
 			"feed_id",
 			"account_id",
 			"message",
@@ -25,6 +26,7 @@ func (e *Comment) FieldMap() (fields []string, values []interface{}) {
 			"updated_at",
 			"deleted_at",
 		}, []interface{}{
+			&e.CommentID,
 			&e.FeedID,
 			&e.AccountID,
 			&e.Message,
