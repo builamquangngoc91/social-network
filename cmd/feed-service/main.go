@@ -12,6 +12,7 @@ import (
 
 	"github.com/Shopify/sarama"
 	_ "github.com/lib/pq"
+	"github.com/redis/go-redis/v9"
 )
 
 var l = log.New()
@@ -56,7 +57,10 @@ func main() {
 		l.Info(err.Error())
 	}
 
-	services := services.NewServices(db, "secret", kafkaProducer, elasticClient)
+	rd := redis.NewClient(&redis.Options{
+		Addr: "localhost:6379",
+	})
+	services := services.NewServices(db, "secret", kafkaProducer, elasticClient, rd)
 
 	l.Printf("HTTP server listening at %v", "8081")
 

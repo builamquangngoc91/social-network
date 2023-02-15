@@ -13,6 +13,7 @@ import (
 	"social-network/utils/xerror"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/redis/go-redis/v9"
 )
 
 type (
@@ -42,13 +43,14 @@ type RemiService struct {
 	feedService    *FeedService
 	commentService *CommentService
 	esClient       *elasticsearch.ElasticClient
+	rd             *redis.Client
 	acl            map[string]map[string]Decl
 }
 
-func NewServices(db *sql.DB, JWTKey string, kafkaProducer *kafka.KafkaProducer, esClient *elasticsearch.ElasticClient) *RemiService {
+func NewServices(db *sql.DB, JWTKey string, kafkaProducer *kafka.KafkaProducer, esClient *elasticsearch.ElasticClient, rd *redis.Client) *RemiService {
 	accountService := NewAccountService(db, JWTKey, kafkaProducer)
-	feedService := NewFeedService(db, kafkaProducer, esClient)
-	commentService := NewCommentService(db)
+	feedService := NewFeedService(db, kafkaProducer, esClient, rd)
+	commentService := NewCommentService(db, kafkaProducer)
 
 	return &RemiService{
 		jwtKey:         JWTKey,
@@ -57,6 +59,7 @@ func NewServices(db *sql.DB, JWTKey string, kafkaProducer *kafka.KafkaProducer, 
 		feedService:    feedService,
 		commentService: commentService,
 		esClient:       esClient,
+		rd:             rd,
 		acl: map[string]map[string]Decl{
 			"/api/v1/register": {
 				http.MethodPost: Decl{
@@ -153,6 +156,13 @@ func NewServices(db *sql.DB, JWTKey string, kafkaProducer *kafka.KafkaProducer, 
 				http.MethodPost: Decl{
 					HandlerFunc:  commentService.Delete,
 					Auth:         User,
+					ResponseType: JSON,
+				},
+			},
+			"/api/v1/getFeedLeaderBoard": {
+				http.MethodPost: Decl{
+					HandlerFunc:  feedService.GetLeaderBoard,
+					Auth:         None,
 					ResponseType: JSON,
 				},
 			},

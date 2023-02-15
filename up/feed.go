@@ -112,3 +112,16 @@ func (r *SearchFeedsRequest) Validate() error {
 type SearchFeedsResponse struct {
 	Feeds []*Feed `json:"feeds"`
 }
+
+type GetLeaderBoardRequest struct {
+	Top int `json:"top`
+}
+
+type Row struct {
+	AccountID     string  `json:"account_id"`
+	NumberOfFeeds float64 `json:"feed"`
+}
+
+type GetLeaderBoardResponse struct {
+	Rows []*Row `json:"rows"`
+}

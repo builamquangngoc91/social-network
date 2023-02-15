@@ -18,6 +18,7 @@ import (
 	"social-network/utils/xerror"
 
 	"github.com/olivere/elastic/v7"
+	"github.com/redis/go-redis/v9"
 )
 
 var _ up.FeedService = &FeedService{}
@@ -26,13 +27,15 @@ type FeedService struct {
 	feedRepo      *repositories.FeedRepository
 	esClient      *elasticsearch.ElasticClient
 	kafkaProducer *kafka.KafkaProducer
+	rd            *redis.Client
 }
 
-func NewFeedService(db *sql.DB, kafkaProducer *kafka.KafkaProducer, esClient *elasticsearch.ElasticClient) *FeedService {
+func NewFeedService(db *sql.DB, kafkaProducer *kafka.KafkaProducer, esClient *elasticsearch.ElasticClient, rd *redis.Client) *FeedService {
 	return &FeedService{
 		feedRepo:      repositories.NewFeedRepository(db),
 		esClient:      esClient,
 		kafkaProducer: kafkaProducer,
+		rd:            rd,
 	}
 }
 
@@ -65,6 +68,10 @@ func (s *FeedService) Create(ctx context.Context, req *up.CreateFeedRequest) (*u
 
 	if err := s.kafkaProducer.SendMessage(ctx, string(kafkaConfig.FeedTopic), body); err != nil {
 		return nil, xerror.Error(xerror.Internal, fmt.Errorf("s.kafkaProducer.SendMessage: %w", err))
+	}
+
+	if err := s.rd.ZIncrBy(ctx, "leaderboard", 1, currentAccount).Err(); err != nil {
+		return nil, xerror.Error(xerror.Internal, fmt.Errorf("cannot update leaderboard"))
 	}
 
 	return &up.CreateFeedResponse{
@@ -163,6 +170,34 @@ func (s *FeedService) Search(ctx context.Context, req *up.SearchFeedsRequest) (*
 	}
 
 	return &up.SearchFeedsResponse{}, nil
+}
+
+func (s *FeedService) GetLeaderBoard(ctx context.Context, req *up.GetLeaderBoardRequest) (*up.GetLeaderBoardResponse, error) {
+	top := req.Top
+	if top == 0 {
+		top = 10
+	}
+
+	zs, err := s.rd.ZRangeArgsWithScores(ctx, redis.ZRangeArgs{
+		Rev:   true,
+		Start: 0,
+		Stop:  top - 1,
+		Key:   "leaderboard",
+	}).Result()
+	if err != nil {
+		return nil, fmt.Errorf("s.rd.ZRangeArgsWithScores: %w", err)
+	}
+
+	rows := make([]*up.Row, 0, len(zs))
+	for _, z := range zs {
+		rows = append(rows, &up.Row{
+			AccountID:     z.Member.(string),
+			NumberOfFeeds: z.Score,
+		})
+	}
+	return &up.GetLeaderBoardResponse{
+		Rows: rows,
+	}, nil
 }
 
 func (s *FeedService) List(ctx context.Context, req *up.ListFeedsRequest) (*up.ListFeedsResponse, error) {
