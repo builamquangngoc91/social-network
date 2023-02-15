@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"social-network/internal/entities"
 	"time"
 )
 
@@ -43,33 +42,6 @@ func NewAccountFollowed(accountID, followerID string) ([]byte, error) {
 		Body: &AccountFollowedBody{
 			AccountID:  accountID,
 			FollowerID: followerID,
-		},
-		CreatedAt: time.Now(),
-	}
-
-	bodyBytes, err := json.Marshal(event)
-	if err != nil {
-		return nil, fmt.Errorf("json.Marshal: %w", err)
-	}
-
-	return bodyBytes, nil
-}
-
-type FeedCreatedBody struct {
-	FeedID    string `json:"feed_id"`
-	AccountID string `json:"account_id"`
-	Message   string `json:"message"`
-	ImageUrl  string `json:"image_url"`
-}
-
-func NewFeedCreated(feed *entities.Feed) ([]byte, error) {
-	event := Event{
-		EventType: FeedCreated,
-		Body: &FeedCreatedBody{
-			FeedID:    feed.FeedID,
-			AccountID: feed.AccountID,
-			Message:   feed.Message,
-			ImageUrl:  feed.ImageUrl,
 		},
 		CreatedAt: time.Now(),
 	}

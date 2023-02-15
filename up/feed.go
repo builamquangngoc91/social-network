@@ -12,6 +12,7 @@ type Feed struct {
 	AccountID string    `json:"account_id"`
 	Message   string    `json:"message"`
 	ImageUrl  string    `json:"image_url"`
+	Tag       string    `json:"tag"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -19,6 +20,7 @@ type Feed struct {
 type CreateFeedRequest struct {
 	Message  string `json:"message"`
 	ImageUrl string `json:"image_url"`
+	Tag      string `json:"tag"`
 }
 
 func (r *CreateFeedRequest) Validate() error {
@@ -87,5 +89,26 @@ type ListFeedsRequest struct {
 }
 
 type ListFeedsResponse struct {
+	Feeds []*Feed `json:"feeds"`
+}
+
+type SearchFeedsRequest struct {
+	Field        string        `json:"field"`
+	Value        string        `json:"value"`
+	OffsetPaging *OffsetPaging `json:"paging"`
+}
+
+func (r *SearchFeedsRequest) Validate() error {
+	if strings.TrimSpace(r.Field) == "" {
+		return xerror.ErrorM(xerror.InvalidArgument, nil, "field can't be null")
+	}
+	if strings.TrimSpace(r.Value) == "" {
+		return xerror.ErrorM(xerror.InvalidArgument, nil, "value can't be null")
+	}
+
+	return nil
+}
+
+type SearchFeedsResponse struct {
 	Feeds []*Feed `json:"feeds"`
 }

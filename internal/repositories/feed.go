@@ -111,6 +111,38 @@ func (r *FeedRepository) List(ctx context.Context, args *ListFeedsArgs) (fs enti
 	return fs, nil
 }
 
+// Search feeds
+func (r *FeedRepository) Search(ctx context.Context, message string) (fs entities.Feeds, _ error) {
+	feed := &entities.Feed{}
+	fields, _ := feed.FieldMap()
+
+	message = "%" + message + "%"
+	stmt := fmt.Sprintf(`SELECT %s 
+	FROM %s 
+	WHERE message LIKE $1 AND deleted_at IS NULL`, strings.Join(fields, ","), feed.TableName())
+	rows, err := r.QueryContext(ctx, stmt, &message)
+	if err != nil {
+		return nil, fmt.Errorf("r.QueryContext: %w", err)
+	}
+
+	defer rows.Close()
+	for rows.Next() {
+		f := &entities.Feed{}
+		_, values := f.FieldMap()
+		err := rows.Scan(values...)
+		if err != nil {
+			return nil, fmt.Errorf("rows.Scan: %w", err)
+		}
+		fs = append(fs, f)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("rows.Err: %w", err)
+	}
+
+	return fs, nil
+}
+
 func (r *FeedRepository) Delete(ctx context.Context, feedID, accountID string) error {
 	feed := &entities.Feed{}
 

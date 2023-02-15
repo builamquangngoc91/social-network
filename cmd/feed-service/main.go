@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"net/http"
 	"social-network/utils/cmsql"
+	"social-network/utils/elasticsearch"
 	"social-network/utils/kafka"
 	log "social-network/utils/log"
 
@@ -50,7 +51,12 @@ func main() {
 		l.Panicf("error when ping: %v", err)
 	}
 
-	services := services.NewServices(db, "secret", kafkaProducer)
+	elasticClient, err := elasticsearch.NewElasticClient([]string{"http://localhost:9200"})
+	if err != nil {
+		l.Info(err.Error())
+	}
+
+	services := services.NewServices(db, "secret", kafkaProducer, elasticClient)
 
 	l.Printf("HTTP server listening at %v", "8081")
 

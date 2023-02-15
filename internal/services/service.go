@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"reflect"
 
+	"social-network/utils/elasticsearch"
 	"social-network/utils/kafka"
 	"social-network/utils/xerror"
 
@@ -40,12 +41,13 @@ type RemiService struct {
 	accountService *AccountService
 	feedService    *FeedService
 	commentService *CommentService
+	esClient       *elasticsearch.ElasticClient
 	acl            map[string]map[string]Decl
 }
 
-func NewServices(db *sql.DB, JWTKey string, kafkaProducer *kafka.KafkaProducer) *RemiService {
+func NewServices(db *sql.DB, JWTKey string, kafkaProducer *kafka.KafkaProducer, esClient *elasticsearch.ElasticClient) *RemiService {
 	accountService := NewAccountService(db, JWTKey, kafkaProducer)
-	feedService := NewFeedService(db, kafkaProducer)
+	feedService := NewFeedService(db, kafkaProducer, esClient)
 	commentService := NewCommentService(db)
 
 	return &RemiService{
@@ -54,6 +56,7 @@ func NewServices(db *sql.DB, JWTKey string, kafkaProducer *kafka.KafkaProducer) 
 		accountService: accountService,
 		feedService:    feedService,
 		commentService: commentService,
+		esClient:       esClient,
 		acl: map[string]map[string]Decl{
 			"/api/v1/register": {
 				http.MethodPost: Decl{
@@ -114,6 +117,13 @@ func NewServices(db *sql.DB, JWTKey string, kafkaProducer *kafka.KafkaProducer) 
 			"/api/v1/deleteFeed": {
 				http.MethodPost: Decl{
 					HandlerFunc:  feedService.Delete,
+					Auth:         User,
+					ResponseType: JSON,
+				},
+			},
+			"/api/v1/searchFeeds": {
+				http.MethodPost: Decl{
+					HandlerFunc:  feedService.Search,
 					Auth:         User,
 					ResponseType: JSON,
 				},

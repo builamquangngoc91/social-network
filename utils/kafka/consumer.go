@@ -56,6 +56,11 @@ func (c *Consumer) consumeAndHandleTopic(ctx context.Context, topic *TopicDef, h
 						l.Errorf("Error while consuming topic name(%s)/ partition(%d): %v", topicName, partition, err.Error())
 					case message := <-pc.Messages():
 						l.Infof("Received message: key(%s), message(%s) ", message.Key, message.Value)
+
+						// TODO: add code to retry 5 times
+						if err := handler.Handle(ctx, message.Value); err != nil {
+							l.Errorf("handler.Handle: %w", err)
+						}
 					}
 				}
 			}()

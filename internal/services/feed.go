@@ -3,6 +3,7 @@ package services
 import (
 	"context"
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"time"
 
@@ -11,21 +12,26 @@ import (
 	"social-network/internal/handlers"
 	"social-network/internal/repositories"
 	"social-network/up"
+	"social-network/utils/elasticsearch"
 	"social-network/utils/golibs/idutil"
 	"social-network/utils/kafka"
 	"social-network/utils/xerror"
+
+	"github.com/olivere/elastic/v7"
 )
 
 var _ up.FeedService = &FeedService{}
 
 type FeedService struct {
 	feedRepo      *repositories.FeedRepository
+	esClient      *elasticsearch.ElasticClient
 	kafkaProducer *kafka.KafkaProducer
 }
 
-func NewFeedService(db *sql.DB, kafkaProducer *kafka.KafkaProducer) *FeedService {
+func NewFeedService(db *sql.DB, kafkaProducer *kafka.KafkaProducer, esClient *elasticsearch.ElasticClient) *FeedService {
 	return &FeedService{
 		feedRepo:      repositories.NewFeedRepository(db),
+		esClient:      esClient,
 		kafkaProducer: kafkaProducer,
 	}
 }
@@ -42,6 +48,7 @@ func (s *FeedService) Create(ctx context.Context, req *up.CreateFeedRequest) (*u
 		AccountID: currentAccount,
 		Message:   req.Message,
 		ImageUrl:  req.ImageUrl,
+		Tag:       req.Tag,
 		CreatedAt: &now,
 		UpdatedAt: &now,
 	}
@@ -51,7 +58,7 @@ func (s *FeedService) Create(ctx context.Context, req *up.CreateFeedRequest) (*u
 	}
 
 	// send message to kafka
-	body, err := handlers.NewFeedCreated(feed)
+	body, err := handlers.MarshalFeedCreated(feed)
 	if err != nil {
 		return nil, xerror.Error(xerror.Internal, fmt.Errorf("handlers.NewFeedCreated: %w", err))
 	}
@@ -101,6 +108,61 @@ func (s *FeedService) Get(ctx context.Context, req *up.GetFeedRequest) (*up.GetF
 	return &up.GetFeedResponse{
 		Feed: s.convertFeedEntToFeedUp(feed),
 	}, nil
+}
+
+func (s *FeedService) Search(ctx context.Context, req *up.SearchFeedsRequest) (*up.SearchFeedsResponse, error) {
+	switch req.Field {
+	case "tag":
+		searchParams := &elasticsearch.SearchParams{
+			Query: elastic.NewMatchQuery(req.Field, req.Value),
+			SortBy: []elastic.Sorter{
+				elastic.NewFieldSort("message").Desc().Sorter,
+			},
+			Index: "feed",
+		}
+		if req.OffsetPaging != nil {
+			searchParams.Limit = req.OffsetPaging.Limit
+			searchParams.Offset = req.OffsetPaging.Offset
+		}
+
+		var (
+			feed entities.Feed
+		)
+		result, err := s.esClient.Search(ctx, searchParams)
+		if err != nil {
+			return nil, fmt.Errorf("s.esClient.Search: %w", err)
+		}
+
+		feedsUp := make([]*up.Feed, 0, len(result.Hits.Hits))
+		for _, hit := range result.Hits.Hits {
+			err := json.Unmarshal(hit.Source, &feed)
+			if err != nil {
+				fmt.Println("[Getting Feeds][Unmarshal] Err=", err)
+			}
+
+			feedsUp = append(feedsUp, s.convertFeedEntToFeedUp(&feed))
+		}
+
+		return &up.SearchFeedsResponse{
+			Feeds: feedsUp,
+		}, nil
+	case "message":
+		feeds, err := s.feedRepo.Search(ctx, req.Value)
+		if err != nil {
+			return nil, fmt.Errorf("s.feedRepo.Search: %w", err)
+		}
+
+		feedsUp := make([]*up.Feed, 0, len(feeds))
+		for _, feed := range feeds {
+			feedsUp = append(feedsUp, s.convertFeedEntToFeedUp(feed))
+		}
+
+		return &up.SearchFeedsResponse{
+			Feeds: feedsUp,
+		}, nil
+	}
+
+	return &up.SearchFeedsResponse{}, nil
 }
 
 func (s *FeedService) List(ctx context.Context, req *up.ListFeedsRequest) (*up.ListFeedsResponse, error) {

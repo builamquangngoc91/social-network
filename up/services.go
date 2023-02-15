@@ -16,6 +16,7 @@ type FeedService interface {
 	Update(context.Context, *UpdateFeedRequest) (*UpdateFeedResponse, error)
 	Get(context.Context, *GetFeedRequest) (*GetFeedResponse, error)
 	List(context.Context, *ListFeedsRequest) (*ListFeedsResponse, error)
+	Search(context.Context, *SearchFeedsRequest) (*SearchFeedsResponse, error)
 	Delete(context.Context, *DeleteFeedRequest) (*DeleteFeedResponse, error)
 }
 

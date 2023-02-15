@@ -5,13 +5,14 @@ import (
 )
 
 type Feed struct {
-	FeedID    string
-	AccountID string
-	Message   string
-	ImageUrl  string
-	CreatedAt *time.Time
-	UpdatedAt *time.Time
-	DeletedAt *time.Time
+	FeedID    string     `json:"feed_id"`
+	AccountID string     `json:"account_id"`
+	Message   string     `json:"message"`
+	ImageUrl  string     `json:"image_url"`
+	Tag       string     `json:"tag"`
+	CreatedAt *time.Time `json:"created_at"`
+	UpdatedAt *time.Time `json:"updated_at"`
+	DeletedAt *time.Time `json:"deleted_at"`
 }
 
 type Feeds []*Feed
@@ -22,6 +23,7 @@ func (e *Feed) FieldMap() (fields []string, values []interface{}) {
 			"account_id",
 			"message",
 			"image_url",
+			"tag",
 			"created_at",
 			"updated_at",
 			"deleted_at",
@@ -30,6 +32,7 @@ func (e *Feed) FieldMap() (fields []string, values []interface{}) {
 			&e.AccountID,
 			&e.Message,
 			&e.ImageUrl,
+			&e.Tag,
 			&e.CreatedAt,
 			&e.UpdatedAt,
 			&e.DeletedAt,

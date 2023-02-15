@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS feed (
     account_id TEXT NOT NULL,
     message TEXT NOT NULL,
     image_url TEXT,
+    tag TEXT,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW(),
     deleted_at TIMESTAMPTZ

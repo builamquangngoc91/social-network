@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"net/http"
 	"social-network/utils/cmsql"
+	"social-network/utils/elasticsearch"
 	"social-network/utils/kafka"
 	log "social-network/utils/log"
 
@@ -32,11 +33,6 @@ func main() {
 	}()
 
 	kafkaProducer := kafka.NewKafkaProducer(syncProducer)
-	// for i := 0; i < 100; i++ {
-	// 	if err := producer.SendMessage(ctx, "event", []byte(fmt.Sprintf("abc %d", rand.Int31()))); err != nil {
-	// 		l.Errorf(err.Error())
-	// 	}
-	// }
 
 	cfg := cmsql.ConfigPostgres{
 		Protocol: "postgres",
@@ -56,7 +52,12 @@ func main() {
 		l.Panicf("error when ping: %v", err)
 	}
 
-	services := services.NewServices(db, "secret", kafkaProducer)
+	elasticClient, err := elasticsearch.NewElasticClient([]string{"http://localhost:9200"})
+	if err != nil {
+		l.Info(err.Error())
+	}
+
+	services := services.NewServices(db, "secret", kafkaProducer, elasticClient)
 
 	l.Printf("HTTP server listening at %v", "8080")
 
