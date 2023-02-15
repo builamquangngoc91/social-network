@@ -3,14 +3,14 @@ package entities
 import "time"
 
 type Comment struct {
-	CommentID string
-	FeedID    string
-	AccountID string
-	Message   string
-	ImageUrl  string
-	CreatedAt *time.Time
-	UpdatedAt *time.Time
-	DeletedAt *time.Time
+	CommentID string     `json:"comment_id"`
+	FeedID    string     `json:"feed_id"`
+	AccountID string     `json:"account_id"`
+	Message   string     `json:"message"`
+	ImageUrl  string     `json:"image_url"`
+	CreatedAt *time.Time `json:"created_at"`
+	UpdatedAt *time.Time `json:"updated_at"`
+	DeletedAt *time.Time `json:"deleted_at"`
 }
 
 type Comments []*Comment

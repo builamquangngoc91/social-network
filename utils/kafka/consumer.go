@@ -5,17 +5,20 @@ import (
 	"sync"
 
 	log "social-network/utils/log"
+	"social-network/utils/sse"
 
 	"github.com/Shopify/sarama"
 )
 
 type Consumer struct {
 	consumer sarama.Consumer
+	sse      *sse.Broker
 }
 
-func NewConsumer(consumer sarama.Consumer) *Consumer {
+func NewConsumer(consumer sarama.Consumer, sse *sse.Broker) *Consumer {
 	return &Consumer{
 		consumer: consumer,
+		sse:      sse,
 	}
 }
 

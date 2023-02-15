@@ -58,9 +58,9 @@ func (s *FeedService) Create(ctx context.Context, req *up.CreateFeedRequest) (*u
 	}
 
 	// send message to kafka
-	body, err := handlers.MarshalFeedCreated(feed)
+	body, err := handlers.MarshalFeed(feed)
 	if err != nil {
-		return nil, xerror.Error(xerror.Internal, fmt.Errorf("handlers.NewFeedCreated: %w", err))
+		return nil, xerror.Error(xerror.Internal, fmt.Errorf("handlers.MarshalFeed: %w", err))
 	}
 
 	if err := s.kafkaProducer.SendMessage(ctx, string(kafkaConfig.FeedTopic), body); err != nil {
@@ -208,6 +208,7 @@ func (s *FeedService) convertFeedEntToFeedUp(feedEnt *entities.Feed) *up.Feed {
 		AccountID: feedEnt.AccountID,
 		Message:   feedEnt.Message,
 		ImageUrl:  feedEnt.ImageUrl,
+		Tag:       feedEnt.Tag,
 	}
 	if feedEnt.CreatedAt != nil {
 		feedUp.CreatedAt = *feedEnt.CreatedAt

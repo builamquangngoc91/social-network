@@ -1,14 +1,14 @@
-package main
+package sse
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
-	"time"
-)
+	"social-network/internal/entities"
 
-// Example SSE server in Golang.
-//     $ go run sse.go
+	"github.com/golang-jwt/jwt"
+)
 
 type Broker struct {
 
@@ -25,9 +25,11 @@ type Broker struct {
 	clients map[chan []byte]bool
 
 	users map[string]chan []byte
+
+	jwtKey string
 }
 
-func NewServer() (broker *Broker) {
+func NewServer(jwtKey string) (broker *Broker) {
 	// Instantiate a broker
 	broker = &Broker{
 		Notifier:       make(chan []byte, 1),
@@ -35,6 +37,7 @@ func NewServer() (broker *Broker) {
 		closingClients: make(chan chan []byte),
 		clients:        make(map[chan []byte]bool),
 		users:          make(map[string]chan []byte),
+		jwtKey:         jwtKey,
 	}
 
 	// Set it running - listening and broadcasting events
@@ -43,14 +46,8 @@ func NewServer() (broker *Broker) {
 	return
 }
 
-var i = 0
-
 func (broker *Broker) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
-
-	// Make sure that the writer supports flushing.
-	//
 	flusher, ok := rw.(http.Flusher)
-
 	if !ok {
 		http.Error(rw, "Streaming unsupported!", http.StatusInternalServerError)
 		return
@@ -64,11 +61,27 @@ func (broker *Broker) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	// Each connection registers its own message channel with the Broker's connections registry
 	messageChan := make(chan []byte)
 
-	// Signal the broker that we have a new connection
-	broker.users[fmt.Sprintf("%d", i)] = messageChan
-	broker.newClients <- messageChan
+	token := req.URL.Query().Get("token")
 
-	i += 1
+	claims := make(jwt.MapClaims)
+	t, err := jwt.ParseWithClaims(token, claims, func(*jwt.Token) (interface{}, error) {
+		return []byte(broker.jwtKey), nil
+	})
+	if err != nil {
+		http.Error(rw, fmt.Sprintf("token isn't valid 1 %v %v", err, token), http.StatusBadRequest)
+		return
+	}
+	_ = t
+
+	accountID, ok := claims["id"].(string)
+	if !ok {
+		http.Error(rw, "token isn't valid 2", http.StatusBadRequest)
+		return
+	}
+
+	// Signal the broker that we have a new connection
+	broker.users[accountID] = messageChan
+	broker.newClients <- messageChan
 
 	// Remove this client from the map of connected clients
 	// when this handler exits.
@@ -120,28 +133,28 @@ func (broker *Broker) listen() {
 			// 	clientMessageChan <- event
 			// }
 
-			clientMessageChan, ok := broker.users["1"]
+			feed, _ := UnmarshalFeed(event)
+			clientMessageChan, ok := broker.users[feed.AccountID]
 			if ok {
-				clientMessageChan <- event
+				clientMessageChan <- []byte(fmt.Sprintf("account(%s) create new feed with message(%s)", feed.AccountID, feed.Message))
 			}
 		}
 	}
-
 }
 
-func main() {
+func UnmarshalFeed(val []byte) (*entities.Feed, error) {
+	var msg entities.Feed
+	if err := json.Unmarshal(val, &msg); err != nil {
+		return nil, fmt.Errorf("json.Unmarshal: %w", err)
+	}
 
-	broker := NewServer()
-
-	go func() {
-		for {
-			time.Sleep(time.Second * 2)
-			eventString := fmt.Sprintf("the time is %v", time.Now())
-			log.Println("Receiving event")
-			broker.Notifier <- []byte(eventString)
-		}
-	}()
-
-	log.Fatal("HTTP server error: ", http.ListenAndServe("localhost:3000", broker))
-
+	return &msg, nil
 }
+
+/*
+var client = new EventSource("http://localhost:8082?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzY0OTEwNTYsImlkIjoiY2ZtNTdpc2R0Nm1paTB1cmMzN2ciLCJ1c2VybmFtZSI6InVzZXJuYW1lMSJ9.w5EN6zUGdJTN9tF_XoMsFua-oSnqyzh-Exs2gzPLOcs")
+client.onmessage = function (msg) {
+  console.log(msg)
+}
+
+*/

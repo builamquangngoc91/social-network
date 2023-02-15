@@ -6,22 +6,27 @@ import (
 	"fmt"
 	"time"
 
+	kafkaConfig "social-network/config/kafka"
 	"social-network/internal/entities"
+	"social-network/internal/handlers"
 	"social-network/internal/repositories"
 	"social-network/up"
 	"social-network/utils/golibs/idutil"
+	"social-network/utils/kafka"
 	"social-network/utils/xerror"
 )
 
 var _ up.CommentService = &CommentService{}
 
 type CommentService struct {
-	commentRepo *repositories.CommentRepository
+	commentRepo   *repositories.CommentRepository
+	kafkaProducer *kafka.KafkaProducer
 }
 
-func NewCommentService(db *sql.DB) *CommentService {
+func NewCommentService(db *sql.DB, kafkaProducer *kafka.KafkaProducer) *CommentService {
 	return &CommentService{
-		commentRepo: repositories.NewCommentRepository(db),
+		commentRepo:   repositories.NewCommentRepository(db),
+		kafkaProducer: kafkaProducer,
 	}
 }
 
@@ -44,6 +49,16 @@ func (s *CommentService) Create(ctx context.Context, req *up.CreateCommentReques
 
 	if err := s.commentRepo.Create(ctx, comment); err != nil {
 		return nil, xerror.Error(xerror.Internal, fmt.Errorf("s.commentRepo.Create: %w", err))
+	}
+
+	// send message to kafka
+	body, err := handlers.MarshalComment(comment)
+	if err != nil {
+		return nil, xerror.Error(xerror.Internal, fmt.Errorf("handlers.MarshalComment: %w", err))
+	}
+
+	if err := s.kafkaProducer.SendMessage(ctx, string(kafkaConfig.CommentTopic), body); err != nil {
+		return nil, xerror.Error(xerror.Internal, fmt.Errorf("s.kafkaProducer.SendMessage: %w", err))
 	}
 
 	return &up.CreateCommentResponse{
