@@ -2,9 +2,11 @@ package handlers
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 
 	"social-network/internal/entities"
+	"social-network/internal/repositories"
 	"social-network/utils/elasticsearch"
 	"social-network/utils/sse"
 )
@@ -12,12 +14,14 @@ import (
 type CommentHandler struct {
 	esClient *elasticsearch.ElasticClient
 	sse      *sse.Broker
+	feedRepo *repositories.FeedRepository
 }
 
-func NewCommentHandler(esClient *elasticsearch.ElasticClient, sse *sse.Broker) *CommentHandler {
+func NewCommentHandler(eurekaDB *sql.DB, esClient *elasticsearch.ElasticClient, sse *sse.Broker) *CommentHandler {
 	return &CommentHandler{
 		esClient: esClient,
 		sse:      sse,
+		feedRepo: repositories.NewFeedRepository(eurekaDB),
 	}
 }
 
@@ -31,8 +35,24 @@ func (h *CommentHandler) Handle(ctx context.Context, msg []byte) error {
 		return fmt.Errorf("h.esClient.Index: %w", err)
 	}
 
-	// notify message
-	h.sse.Notifier <- msg
+	feed, err := h.feedRepo.FindByFeedID(ctx, comment.FeedID)
+	if err != nil {
+		return fmt.Errorf("h.feedRepo.FindByFeedID: %w", err)
+	}
+
+	if comment.AccountID != feed.AccountID {
+		msgNotification := &sse.MessageNotification{
+			AccountID: feed.AccountID,
+			Message:   fmt.Sprintf("Account (%s) created a comment with message(%s) on feed(%s)", comment.AccountID, comment.Message, feed.FeedID),
+		}
+		msgNotificationBytes, err := msgNotification.Marshal()
+		if err != nil {
+			return fmt.Errorf("msgNotification.Marshal: %v", err)
+		}
+
+		// notify message
+		h.sse.Notifier <- msgNotificationBytes
+	}
 
 	return nil
 }

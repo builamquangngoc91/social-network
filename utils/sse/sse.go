@@ -167,12 +167,20 @@ func UnmarshalFeed(val []byte) (*entities.Feed, error) {
 }
 
 /*
-var client = new EventSource("http://localhost:8082?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzY1MjAxNDQsImlkIjoiY2Ztb3Rhc2R0Nm1yc3BvZ3U2NTAiLCJ1c2VybmFtZSI6InVzZXJuYW1lMSJ9.L_Ptcz012xxblDV-K6ZEf5Bq-Djzam-7bZ4TZ3ILgwg")
+user1
+var client = new EventSource("http://localhost:8082?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzY1MjU0MTEsImlkIjoiY2Ztb3Rhc2R0Nm1yc3BvZ3U2NTAiLCJ1c2VybmFtZSI6InVzZXJuYW1lMSJ9.w2tyI7-FAiybO0r2EXbf90sHptcV3ZnfLtltLbuNx6c")
 client.onmessage = function (msg) {
   console.log(msg)
 }
 
-var client = new EventSource("http://localhost:8082?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzY1MjAyOTgsImlkIjoiY2Ztb3Voa2R0Nm1yc3BvZ3U2NWciLCJ1c2VybmFtZSI6InVzZXJuYW1lMiJ9.7wPvgfVPv1Toh0UQcA5SvweJuN0Bdue4bd9_8NkYUz4")
+user2
+var client = new EventSource("http://localhost:8082?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzY1MjM1NDEsImlkIjoiY2Ztb3Voa2R0Nm1yc3BvZ3U2NWciLCJ1c2VybmFtZSI6InVzZXJuYW1lMiJ9.RlwydZ23-fNV25hTDf3rgBXkOQwK5u8FStNNDE7pxQg")
+client.onmessage = function (msg) {
+  console.log(msg)
+}
+
+user3
+var client = new EventSource("http://localhost:8082?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzY1MjM2MTEsImlkIjoiY2ZtcGZ2NGR0Nm1yc3BvZ3U2NmciLCJ1c2VybmFtZSI6InVzZXJuYW1lMyJ9.48hcOvUimVcEE-EAOYpzs2cfadAOwvb1xQ99_N9jQAw")
 client.onmessage = function (msg) {
   console.log(msg)
 }

@@ -133,8 +133,8 @@ func (s *AccountService) Follow(ctx context.Context, req *up.FollowRequest) (*up
 	now := time.Now()
 	follower := &entities.Follower{
 		ID:           idutil.NewID(),
-		AccountID:    currentAccount,
-		FollowerID:   req.AccountID,
+		AccountID:    req.AccountID,
+		FollowerID:   currentAccount,
 		FollowedDate: &now,
 		CreatedAt:    &now,
 		UpdatedAt:    &now,
@@ -172,8 +172,8 @@ func (s *AccountService) UnFollow(ctx context.Context, req *up.UnFollowRequest) 
 	now := time.Now()
 	follower := &entities.Follower{
 		ID:             idutil.NewID(),
-		AccountID:      currentAccount,
-		FollowerID:     req.AccountID,
+		AccountID:      req.AccountID,
+		FollowerID:     currentAccount,
 		UnFollowedDate: &now,
 		CreatedAt:      &now,
 		UpdatedAt:      &now,

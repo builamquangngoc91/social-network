@@ -48,32 +48,32 @@ func (r *FollowerRepository) Upsert(ctx context.Context, u *entities.Follower) e
 	return err
 }
 
-func (r *FeedRepository) ListByAccountID(ctx context.Context, accountID string) (followerIDs []string, _ error) {
-	comment := &entities.Comment{}
-	fields, _ := comment.FieldMap()
+func (r *FollowerRepository) ListByAccountID(ctx context.Context, accountID string) (fs entities.Followers, _ error) {
+	follower := &entities.Follower{}
+	fields, _ := follower.FieldMap()
 
-	stmt := fmt.Sprintf(`SELECT %s 
+	stmt := fmt.Sprintf(`SELECT %s
 	FROM %s 
-	WHERE feed_id = $1::TEXT`, strings.Join(fields, ","), comment.TableName())
-	rows, err := r.QueryContext(ctx, stmt, args.FeedID)
+	WHERE account_id = $1::TEXT AND followed_date IS NOT NULL`, strings.Join(fields, ","), follower.TableName())
+	rows, err := r.QueryContext(ctx, stmt, accountID)
 	if err != nil {
 		return nil, fmt.Errorf("r.QueryContext: %w", err)
 	}
 
 	defer rows.Close()
 	for rows.Next() {
-		c := &entities.Comment{}
-		_, values := c.FieldMap()
+		f := &entities.Follower{}
+		_, values := f.FieldMap()
 		err := rows.Scan(values...)
 		if err != nil {
 			return nil, fmt.Errorf("rows.Scan: %w", err)
 		}
-		cs = append(cs, c)
+		fs = append(fs, f)
 	}
 
 	if err := rows.Err(); err != nil {
 		return nil, fmt.Errorf("rows.Err: %w", err)
 	}
 
-	return cs, nil
+	return fs, nil
 }

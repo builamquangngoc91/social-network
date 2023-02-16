@@ -61,6 +61,20 @@ func (r *FeedRepository) Update(ctx context.Context, u *entities.Feed) error {
 	return err
 }
 
+func (r *FeedRepository) FindByFeedID(ctx context.Context, feedID string) (*entities.Feed, error) {
+	user := &entities.Feed{}
+	fields, values := user.FieldMap()
+
+	stmt := fmt.Sprintf(`SELECT %s FROM %s WHERE feed_id = $1 AND deleted_at IS NULL`, strings.Join(fields, ","), user.TableName())
+	row := r.QueryRowContext(ctx, stmt, &feedID)
+
+	if err := row.Scan(values...); err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}
+
 func (r *FeedRepository) FindByFeedIDAndAccountID(ctx context.Context, feedID, accountID string) (*entities.Feed, error) {
 	user := &entities.Feed{}
 	fields, values := user.FieldMap()
