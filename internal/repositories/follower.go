@@ -4,9 +4,10 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"strings"
+
 	"social-network/internal/entities"
 	"social-network/utils/golibs/database"
-	"strings"
 )
 
 type FollowerRepository struct {
@@ -45,4 +46,34 @@ func (r *FollowerRepository) Upsert(ctx context.Context, u *entities.Follower) e
 	}
 
 	return err
+}
+
+func (r *FeedRepository) ListByAccountID(ctx context.Context, accountID string) (followerIDs []string, _ error) {
+	comment := &entities.Comment{}
+	fields, _ := comment.FieldMap()
+
+	stmt := fmt.Sprintf(`SELECT %s 
+	FROM %s 
+	WHERE feed_id = $1::TEXT`, strings.Join(fields, ","), comment.TableName())
+	rows, err := r.QueryContext(ctx, stmt, args.FeedID)
+	if err != nil {
+		return nil, fmt.Errorf("r.QueryContext: %w", err)
+	}
+
+	defer rows.Close()
+	for rows.Next() {
+		c := &entities.Comment{}
+		_, values := c.FieldMap()
+		err := rows.Scan(values...)
+		if err != nil {
+			return nil, fmt.Errorf("rows.Scan: %w", err)
+		}
+		cs = append(cs, c)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("rows.Err: %w", err)
+	}
+
+	return cs, nil
 }

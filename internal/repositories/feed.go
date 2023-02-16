@@ -61,7 +61,6 @@ func (r *FeedRepository) Update(ctx context.Context, u *entities.Feed) error {
 	return err
 }
 
-// FindByFeedID find feed by feedID
 func (r *FeedRepository) FindByFeedIDAndAccountID(ctx context.Context, feedID, accountID string) (*entities.Feed, error) {
 	user := &entities.Feed{}
 	fields, values := user.FieldMap()
@@ -80,7 +79,6 @@ type ListFeedsArgs struct {
 	AccountID *string
 }
 
-// List find feeds
 func (r *FeedRepository) List(ctx context.Context, args *ListFeedsArgs) (fs entities.Feeds, _ error) {
 	feed := &entities.Feed{}
 	fields, _ := feed.FieldMap()
@@ -111,7 +109,6 @@ func (r *FeedRepository) List(ctx context.Context, args *ListFeedsArgs) (fs enti
 	return fs, nil
 }
 
-// Search feeds
 func (r *FeedRepository) Search(ctx context.Context, message string) (fs entities.Feeds, _ error) {
 	feed := &entities.Feed{}
 	fields, _ := feed.FieldMap()

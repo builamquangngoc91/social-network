@@ -1,6 +1,8 @@
 package entities
 
 import (
+	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -41,4 +43,21 @@ func (e *Feed) FieldMap() (fields []string, values []interface{}) {
 
 func (e *Feed) TableName() string {
 	return "feed"
+}
+
+func (e *Feed) Marshal() ([]byte, error) {
+	msgByte, err := json.Marshal(e)
+	if err != nil {
+		return nil, fmt.Errorf("json.Marshal: %w", err)
+	}
+
+	return msgByte, nil
+}
+
+func (e *Feed) Unmarshal(val []byte) error {
+	if err := json.Unmarshal(val, e); err != nil {
+		return fmt.Errorf("json.Unmarshal: %w", err)
+	}
+
+	return nil
 }

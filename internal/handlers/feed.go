@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
+
 	"social-network/internal/entities"
 	"social-network/utils/elasticsearch"
 	"social-network/utils/sse"
@@ -22,35 +22,26 @@ func NewFeedHandler(esClient *elasticsearch.ElasticClient, sse *sse.Broker) *Fee
 }
 
 func (h *FeedHandler) Handle(ctx context.Context, msg []byte) error {
-	feedMsg, err := UnmarshalFeed(msg)
-	if err != nil {
-		return fmt.Errorf("UnmarshalFeed: %w", err)
+	feed := &entities.Feed{}
+	if err := feed.Unmarshal(msg); err != nil {
+		return fmt.Errorf("feed.Unmarshal: %w", err)
 	}
 
-	if err := h.esClient.Index(ctx, "feed", feedMsg); err != nil {
+	if err := h.esClient.Index(ctx, "feed", feed); err != nil {
 		return fmt.Errorf("h.esClient.Index: %w", err)
 	}
 
+	msgNotification := &sse.MessageNotification{
+		AccountID: feed.AccountID,
+		Message:   fmt.Sprintf("Account (%s) created a feed with message(%s)", feed.FeedID, feed.Message),
+	}
+	msgNotificationBytes, err := msgNotification.Marshal()
+	if err != nil {
+		return fmt.Errorf("msgNotification.Marshal: %v", err)
+	}
+
 	// notify message
-	h.sse.Notifier <- msg
+	h.sse.Notifier <- msgNotificationBytes
 
 	return nil
-}
-
-func MarshalFeed(feed *entities.Feed) ([]byte, error) {
-	msgByte, err := json.Marshal(feed)
-	if err != nil {
-		return nil, fmt.Errorf("json.Marshal: %w", err)
-	}
-
-	return msgByte, nil
-}
-
-func UnmarshalFeed(val []byte) (*entities.Feed, error) {
-	var msg entities.Feed
-	if err := json.Unmarshal(val, &msg); err != nil {
-		return nil, fmt.Errorf("json.Unmarshal: %w", err)
-	}
-
-	return &msg, nil
 }

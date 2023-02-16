@@ -8,9 +8,9 @@ import (
 
 	kafkaConfig "social-network/config/kafka"
 	"social-network/internal/entities"
-	"social-network/internal/handlers"
 	"social-network/internal/repositories"
 	"social-network/up"
+	"social-network/utils/acl"
 	"social-network/utils/golibs/idutil"
 	"social-network/utils/kafka"
 	"social-network/utils/xerror"
@@ -34,7 +34,7 @@ func (s *CommentService) Create(ctx context.Context, req *up.CreateCommentReques
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
-	currentAccount, _ := accountIDFromCtx(ctx)
+	currentAccount, _ := acl.AccountIDFromCtx(ctx)
 
 	now := time.Now()
 	comment := &entities.Comment{
@@ -52,7 +52,7 @@ func (s *CommentService) Create(ctx context.Context, req *up.CreateCommentReques
 	}
 
 	// send message to kafka
-	body, err := handlers.MarshalComment(comment)
+	body, err := comment.Marshal()
 	if err != nil {
 		return nil, xerror.Error(xerror.Internal, fmt.Errorf("handlers.MarshalComment: %w", err))
 	}
@@ -110,7 +110,7 @@ func (s *CommentService) Delete(ctx context.Context, req *up.DeleteCommentReques
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
-	currentAccount, _ := accountIDFromCtx(ctx)
+	currentAccount, _ := acl.AccountIDFromCtx(ctx)
 	err := s.commentRepo.Delete(ctx, req.CommentID, currentAccount)
 	if err != nil {
 		return nil, xerror.Error(xerror.Internal, fmt.Errorf("s.commentRepo.Delete: %w", err))

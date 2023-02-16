@@ -10,6 +10,28 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
+type MessageNotification struct {
+	AccountID string `json:"account_id"`
+	Message   string `json:"message"`
+}
+
+func (m *MessageNotification) Marshal() ([]byte, error) {
+	msgByte, err := json.Marshal(m)
+	if err != nil {
+		return nil, fmt.Errorf("json.Marshal: %w", err)
+	}
+
+	return msgByte, nil
+}
+
+func (m *MessageNotification) Unmarshal(val []byte) error {
+	if err := json.Unmarshal(val, m); err != nil {
+		return fmt.Errorf("json.Unmarshal: %w", err)
+	}
+
+	return nil
+}
+
 type Broker struct {
 
 	// Events are pushed to this channel by the main events-gathering routine
@@ -99,7 +121,6 @@ func (broker *Broker) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	}()
 
 	for {
-
 		// Write to the ResponseWriter
 		// Server Sent Events compatible
 		fmt.Fprintf(rw, "data: %s\n\n", <-messageChan)
@@ -107,7 +128,6 @@ func (broker *Broker) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 		// Flush the data immediately instead of buffering it for later.
 		flusher.Flush()
 	}
-
 }
 
 func (broker *Broker) listen() {
@@ -121,22 +141,17 @@ func (broker *Broker) listen() {
 			log.Printf("Client added. %d registered clients", len(broker.clients))
 		case s := <-broker.closingClients:
 
-			// A client has dettached and we want to
+			// A client has detached and we want to
 			// stop sending them messages.
 			delete(broker.clients, s)
 			log.Printf("Removed client. %d registered clients", len(broker.clients))
-		case event := <-broker.Notifier:
+		case message := <-broker.Notifier:
+			messageNotification := &MessageNotification{}
+			messageNotification.Unmarshal(message)
 
-			// We got a new event from the outside!
-			// Send event to all connected clients
-			// for clientMessageChan, _ := range broker.clients {
-			// 	clientMessageChan <- event
-			// }
-
-			feed, _ := UnmarshalFeed(event)
-			clientMessageChan, ok := broker.users[feed.AccountID]
+			clientMessageChan, ok := broker.users[messageNotification.AccountID]
 			if ok {
-				clientMessageChan <- []byte(fmt.Sprintf("account(%s) create new feed with message(%s)", feed.AccountID, feed.Message))
+				clientMessageChan <- []byte(messageNotification.Message)
 			}
 		}
 	}
@@ -152,7 +167,12 @@ func UnmarshalFeed(val []byte) (*entities.Feed, error) {
 }
 
 /*
-var client = new EventSource("http://localhost:8082?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzY0OTEwNTYsImlkIjoiY2ZtNTdpc2R0Nm1paTB1cmMzN2ciLCJ1c2VybmFtZSI6InVzZXJuYW1lMSJ9.w5EN6zUGdJTN9tF_XoMsFua-oSnqyzh-Exs2gzPLOcs")
+var client = new EventSource("http://localhost:8082?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzY1MjAxNDQsImlkIjoiY2Ztb3Rhc2R0Nm1yc3BvZ3U2NTAiLCJ1c2VybmFtZSI6InVzZXJuYW1lMSJ9.L_Ptcz012xxblDV-K6ZEf5Bq-Djzam-7bZ4TZ3ILgwg")
+client.onmessage = function (msg) {
+  console.log(msg)
+}
+
+var client = new EventSource("http://localhost:8082?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzY1MjAyOTgsImlkIjoiY2Ztb3Voa2R0Nm1yc3BvZ3U2NWciLCJ1c2VybmFtZSI6InVzZXJuYW1lMiJ9.7wPvgfVPv1Toh0UQcA5SvweJuN0Bdue4bd9_8NkYUz4")
 client.onmessage = function (msg) {
   console.log(msg)
 }

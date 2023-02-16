@@ -1,6 +1,10 @@
 package entities
 
-import "time"
+import (
+	"encoding/json"
+	"fmt"
+	"time"
+)
 
 type Comment struct {
 	CommentID string     `json:"comment_id"`
@@ -39,4 +43,21 @@ func (e *Comment) FieldMap() (fields []string, values []interface{}) {
 
 func (e *Comment) TableName() string {
 	return "comment"
+}
+
+func (e *Comment) Marshal() ([]byte, error) {
+	msgByte, err := json.Marshal(e)
+	if err != nil {
+		return nil, fmt.Errorf("json.Marshal: %w", err)
+	}
+
+	return msgByte, nil
+}
+
+func (e *Comment) Unmarshal(val []byte) error {
+	if err := json.Unmarshal(val, e); err != nil {
+		return fmt.Errorf("json.Unmarshal: %w", err)
+	}
+
+	return nil
 }

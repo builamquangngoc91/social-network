@@ -9,9 +9,9 @@ import (
 
 	kafkaConfig "social-network/config/kafka"
 	"social-network/internal/entities"
-	"social-network/internal/handlers"
 	"social-network/internal/repositories"
 	"social-network/up"
+	"social-network/utils/acl"
 	"social-network/utils/elasticsearch"
 	"social-network/utils/golibs/idutil"
 	"social-network/utils/kafka"
@@ -43,7 +43,7 @@ func (s *FeedService) Create(ctx context.Context, req *up.CreateFeedRequest) (*u
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
-	currentAccount, _ := accountIDFromCtx(ctx)
+	currentAccount, _ := acl.AccountIDFromCtx(ctx)
 
 	now := time.Now()
 	feed := &entities.Feed{
@@ -61,7 +61,7 @@ func (s *FeedService) Create(ctx context.Context, req *up.CreateFeedRequest) (*u
 	}
 
 	// send message to kafka
-	body, err := handlers.MarshalFeed(feed)
+	body, err := feed.Marshal()
 	if err != nil {
 		return nil, xerror.Error(xerror.Internal, fmt.Errorf("handlers.MarshalFeed: %w", err))
 	}
@@ -83,7 +83,7 @@ func (s *FeedService) Update(ctx context.Context, req *up.UpdateFeedRequest) (*u
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
-	currentAccount, _ := accountIDFromCtx(ctx)
+	currentAccount, _ := acl.AccountIDFromCtx(ctx)
 
 	now := time.Now()
 	feed := &entities.Feed{
@@ -105,7 +105,7 @@ func (s *FeedService) Get(ctx context.Context, req *up.GetFeedRequest) (*up.GetF
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
-	currentAccount, _ := accountIDFromCtx(ctx)
+	currentAccount, _ := acl.AccountIDFromCtx(ctx)
 
 	feed, err := s.feedRepo.FindByFeedIDAndAccountID(ctx, req.FeedID, currentAccount)
 	if err != nil {
@@ -203,7 +203,7 @@ func (s *FeedService) GetLeaderBoard(ctx context.Context, req *up.GetLeaderBoard
 func (s *FeedService) List(ctx context.Context, req *up.ListFeedsRequest) (*up.ListFeedsResponse, error) {
 	listFeedsArgs := &repositories.ListFeedsArgs{}
 	if req.OnlyCurrentAccount {
-		currentAccount, _ := accountIDFromCtx(ctx)
+		currentAccount, _ := acl.AccountIDFromCtx(ctx)
 
 		listFeedsArgs.AccountID = &currentAccount
 	}
@@ -227,7 +227,7 @@ func (s *FeedService) Delete(ctx context.Context, req *up.DeleteFeedRequest) (*u
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
-	currentAccount, _ := accountIDFromCtx(ctx)
+	currentAccount, _ := acl.AccountIDFromCtx(ctx)
 
 	err := s.feedRepo.Delete(ctx, req.FeedID, currentAccount)
 	if err != nil {

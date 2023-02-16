@@ -11,6 +11,7 @@ import (
 	"social-network/internal/handlers"
 	"social-network/internal/repositories"
 	"social-network/up"
+	"social-network/utils/acl"
 	"social-network/utils/crypto"
 	"social-network/utils/golibs/idutil"
 	"social-network/utils/kafka"
@@ -121,7 +122,7 @@ func (s *AccountService) Follow(ctx context.Context, req *up.FollowRequest) (*up
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
-	currentAccount, _ := accountIDFromCtx(ctx)
+	currentAccount, _ := acl.AccountIDFromCtx(ctx)
 	if _, err := s.accountRepo.FindByID(ctx, req.AccountID); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, xerror.Error(xerror.Internal, fmt.Errorf("account %s not found", req.AccountID))
@@ -160,7 +161,7 @@ func (s *AccountService) UnFollow(ctx context.Context, req *up.UnFollowRequest) 
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
-	currentAccount, _ := accountIDFromCtx(ctx)
+	currentAccount, _ := acl.AccountIDFromCtx(ctx)
 	if _, err := s.accountRepo.FindByID(ctx, req.AccountID); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, xerror.Error(xerror.Internal, fmt.Errorf("account %s not found", req.AccountID))

@@ -61,7 +61,6 @@ func (r *CommentRepository) Update(ctx context.Context, u *entities.Comment) err
 	return err
 }
 
-// FindByCommentID find feed by commentID
 func (r *CommentRepository) FindByCommentID(ctx context.Context, commentID string) (*entities.Comment, error) {
 	comment := &entities.Comment{}
 	fields, values := comment.FieldMap()
@@ -80,7 +79,6 @@ type ListCommentsArgs struct {
 	FeedID string
 }
 
-// List comments
 func (r *CommentRepository) List(ctx context.Context, args *ListCommentsArgs) (cs entities.Comments, _ error) {
 	comment := &entities.Comment{}
 	fields, _ := comment.FieldMap()

@@ -44,7 +44,6 @@ func (r *AccountRepository) Create(ctx context.Context, u *entities.Account) err
 	return err
 }
 
-// FindByUsername find user by username
 func (r *AccountRepository) FindByUsername(ctx context.Context, username string) (*entities.Account, error) {
 	user := &entities.Account{}
 	fields, values := user.FieldMap()
@@ -59,7 +58,6 @@ func (r *AccountRepository) FindByUsername(ctx context.Context, username string)
 	return user, nil
 }
 
-// FindByID find user by id
 func (r *AccountRepository) FindByID(ctx context.Context, id string) (*entities.Account, error) {
 	user := &entities.Account{}
 	fields, values := user.FieldMap()
@@ -74,12 +72,11 @@ func (r *AccountRepository) FindByID(ctx context.Context, id string) (*entities.
 	return user, nil
 }
 
-type ListUsersArgs struct {
+type ListAccountsArgs struct {
 	IDs []string
 }
 
-// List accounts
-func (r *AccountRepository) List(ctx context.Context, args *ListUsersArgs) (us entities.Accounts, _ error) {
+func (r *AccountRepository) List(ctx context.Context, args *ListAccountsArgs) (us entities.Accounts, _ error) {
 	user := &entities.Account{}
 	fields, _ := user.FieldMap()
 
