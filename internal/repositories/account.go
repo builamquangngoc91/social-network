@@ -78,7 +78,7 @@ type ListUsersArgs struct {
 	IDs []string
 }
 
-// List find accounts
+// List accounts
 func (r *AccountRepository) List(ctx context.Context, args *ListUsersArgs) (us entities.Accounts, _ error) {
 	user := &entities.Account{}
 	fields, _ := user.FieldMap()
